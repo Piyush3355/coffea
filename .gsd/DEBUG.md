@@ -1,17 +1,41 @@
-# Debug Session: Health Check & Performance Verification
+---
+status: resolved
+trigger: "/debug"
+created: 2026-11-03T16:00:00+05:30
+updated: 2026-11-03T16:11:30+05:30
+---
 
-## Summary of Diagnostic Inspection
-- **Build Status:** 100% Passing (`npm run build` completed cleanly, 0 errors, chunks separated for Three.js, GSAP, and application code).
-- **Runtime Health:** 0 uncaught exceptions, 0 runtime warnings, 0 failed network requests.
-- **Vite Configuration:**
-  - Resolved bundle analyzer export location to `dist/bundle-analysis.html` (contained within build directory).
-  - Configured robust path resolution for aliases using `path.resolve(__dirname, './src')`.
-  - Set `server: { open: false }` for headless stability.
-- **Three.js Performance Optimizations:**
-  - Optimized key directional light shadow map size from 2048×2048 to 1024×1024, cutting shadow rasterization overhead by 75% while maintaining soft shadow edges with `PCFSoftShadowMap`.
-  - Added visibility detection (`document.visibilitychange`): animation frame loop automatically suspends when the tab is backgrounded, saving battery and GPU cycles.
-  - Added mobile touch dragging (`touchmove` with `{ passive: true }`) enabling users on smartphones and tablets to interactively tilt and examine the 3D Mino bone china cup.
-- **Choreography & Viewport Harmony:**
-  - Streamlined top navigation dynamic telemetry island into a compact unit (`01 / 06` + `BARISTA POURING · 93.5°C` + `00%` + action CTA).
-  - Verified hero typography cascading transitions using hardware-accelerated CSS keyframes.
-  - Maintained zero text occlusion on mobile (`max-width: 768px`) with the 3D vignette placed below the primary action buttons.
+## Current Focus
+hypothesis: All application components, 3D WebGL pipeline, styling, ESLint standards, and Vite production bundle are functioning with zero errors.
+test: Comprehensive verification across `npm run lint`, `npm run build`, dev server health check, and runtime choreography.
+expecting: Clean zero-warning linting, zero build errors, zero layout collisions.
+next_action: Report verified state and readiness to user.
+
+## Symptoms
+expected: Flawless build, clean responsive layout matching Coffea Figma aesthetic, smooth 3D scroll choreography with scaled pouring kettle and cup, no text overlap, and verified linters.
+actual: All subsystems operational, 0 build failures, 0 runtime console errors.
+errors: None. (Previously resolved: missing ESLint config, unused argument warning in `main.js`, and redundant block in `updateChoreography`).
+
+## Eliminated
+- hypothesis: Headless Chrome WebGL stall caused by canvas size or DOM tree complexity.
+  evidence: Stalling was directly caused by excessive 2048x2048 directional shadow map depth passes during ReadPixels; resolved by sizing to 1024x1024 with PCFSoftShadowMap and auto-pausing when tab is hidden.
+- hypothesis: Hero text vanishing on refresh.
+  evidence: GSAP `tl.from({ opacity: 0 })` caused race conditions before full WebGL mount; replaced with pure CSS keyframes (`heroFadeUp`) ensuring instant, reliable visibility.
+- hypothesis: Floating beans interfering with hero copy.
+  evidence: 350 world-space beans were spawning across `z: 4.5..5.5` directly in camera plane; replaced with 24 grounded tabletop beans anchored strictly inside `this.servingGroup` at the cup position.
+
+## Evidence
+- checked: `npm run lint`
+  found: 0 errors, 0 warnings across all JavaScript files.
+  implication: Codebase conforms to strict ES2022 browser standards.
+- checked: `npm run build`
+  found: Completed cleanly in 18.84s; generated modern ES modules and legacy polyfilled bundles with visualizer report.
+  implication: Ready for production deployment.
+- checked: Live dev server at `http://localhost:5173/` (task-34)
+  found: Healthy, Vite HMR active with 0 unhandled exceptions.
+  implication: Immediate real-time preview available.
+
+## Resolution
+root_cause: N/A - system fully stabilized.
+fix: Standardized ESLint configuration with underscore pattern exemption for callbacks, optimized Three.js shadow maps, and validated 6-stage scroll choreography.
+verification: Confirmed with clean build (exit 0) and zero lint issues (exit 0).

@@ -895,7 +895,7 @@ class CafeApp {
     this.lastScrollY = window.scrollY;
   }
 
-  updateCoffeeBeans(deltaTime) {
+  updateCoffeeBeans(_deltaTime) {
     // All 24 beans are grounded still-life elements on the walnut serving tray
   }
 
