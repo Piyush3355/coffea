@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script type="module" crossorigin src="/assets/js/polyfills-CMXGZahz.js"></script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Coffea — Premium Artisan Coffee Shop & Specialty Roastery. Inspired by the Coffea Figma Template with Interactive 3D Ceramics.">
+  <meta name="theme-color" content="#fbfaf8">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Coffea — Specialty Coffee Shop & Roastery">
+  <meta property="og:description" content="A cup of coffee can complete your day. Handcrafted single-origin roasts, artisan ceramics, and warm hospitality.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Coffea — Specialty Coffee">
+  <meta name="twitter:description" content="A cup of coffee can complete your day.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <title>Coffea — Specialty Coffee Shop &amp; Roastery</title>
+  <script type="module" crossorigin src="/assets/js/index-C53S0avd.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/js/three-Bhc4CK-b.js">
+  <link rel="modulepreload" crossorigin href="/assets/js/gsap-C_zXkUox.js">
+  <link rel="stylesheet" crossorigin href="/assets/css/index-ByZ41LIb.css">
+  <script type="module">import.meta.url;import("_").catch(()=>1);(async function*(){})().next();if(location.protocol!="file:"){window.__vite_is_modern_browser=true}</script>
+  <script type="module">!function(){if(window.__vite_is_modern_browser)return;console.warn("vite: loading legacy chunks, syntax error above and the same error below should be ignored");var e=document.getElementById("vite-legacy-polyfill"),n=document.createElement("script");n.src=e.src,n.onload=function(){System.import(document.getElementById('vite-legacy-entry').getAttribute('data-src'))},document.body.appendChild(n)}();</script>
+</head>
+<body class="theme-coffea">
+  <!-- Top-Level Hairline Scroll Progress Bar -->
+  <div id="scroll-progress" class="scroll-progress" aria-hidden="true">
+    <div class="scroll-progress__bar" id="scroll-progress-bar"></div>
+  </div>
+
+  <div id="smooth-wrapper">
+    <div id="smooth-content">
+      <!-- 3D WebGL Canvas Layer -->
+      <canvas id="webgl-canvas" aria-label="Interactive 3D ceramic cup and coffee experience"></canvas>
+
+      <!-- Persistent Minimalist Dynamic Top Navigation Island -->
+      <header class="nav" id="main-nav" role="banner">
+        <div class="nav__container">
+          <div class="nav__left">
+            <a href="#hero" class="nav__logo" aria-label="Coffea Home">
+              <span class="nav__logo-mark" aria-hidden="true">☕</span>
+              <span class="nav__logo-text">Coffea</span>
+            </a>
+            <div class="nav__live-status" aria-label="Roastery status">
+              <span class="status-dot status-dot--pulse" aria-hidden="true"></span>
+              <span class="status-text" id="live-time-ticker">SEATTLE 07:00 AM · OPEN TODAY</span>
+            </div>
+          </div>
+
+          <nav class="nav__links" id="nav-menu" role="navigation" aria-label="Main navigation">
+            <a href="#hero" class="nav__link nav__link--active" data-section="hero">
+              <span class="nav__link-idx">01</span><span>Home</span>
+            </a>
+            <a href="#about" class="nav__link" data-section="about">
+              <span class="nav__link-idx">02</span><span>About</span>
+            </a>
+            <a href="#menu" class="nav__link" data-section="menu">
+              <span class="nav__link-idx">03</span><span>Menu</span>
+            </a>
+            <a href="#reservation" class="nav__link" data-section="reservation">
+              <span class="nav__link-idx">04</span><span>Reserve</span>
+            </a>
+            <a href="#reviews" class="nav__link" data-section="reviews">
+              <span class="nav__link-idx">05</span><span>Reviews</span>
+            </a>
+            <a href="#contact" class="nav__link" data-section="contact">
+              <span class="nav__link-idx">06</span><span>Visit</span>
+            </a>
+          </nav>
+
+          <!-- Top-Level Dynamic Scroll-Reactive Island -->
+          <div class="nav__dynamic" id="nav-dynamic" role="region" aria-label="Real-time section telemetry">
+            <div class="nav__meta">
+              <span class="nav__section-tag" id="nav-section-num">01 / 06</span>
+              <div class="nav__chips" id="nav-chips">
+                <!-- Dynamically rendered per section -->
+              </div>
+            </div>
+            <div class="nav__progress-pill" id="nav-progress-readout">00%</div>
+            <button class="nav__cta-btn" id="nav-cta-action" type="button">Book Table</button>
+          </div>
+
+          <button class="nav__toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation">
+            <span class="nav__toggle-bar" aria-hidden="true"></span>
+            <span class="nav__toggle-bar" aria-hidden="true"></span>
+            <span class="nav__toggle-bar" aria-hidden="true"></span>
+          </button>
+        </div>
+      </header>
+
+      <main id="main-content" role="main">
+
+        <!-- ─── 01 / HERO SECTION ─── -->
+        <section id="hero" class="section section--hero" data-section="hero" aria-labelledby="hero-title">
+          <div class="section__container">
+            <div class="hero__layout">
+              <div class="hero__content">
+                <div class="hero__badge-row">
+                  <span class="hero__badge">WELCOME TO COFFEA</span>
+                  <span class="hero__badge-sub">EST. 2012 · SEATTLE, WA</span>
+                </div>
+
+                <h1 id="hero-title" class="hero__title">
+                  <span class="hero__title-line"><span>A Cup of Coffee</span></span>
+                  <span class="hero__title-line"><span class="text-serif text-accent">Can Complete</span></span>
+                  <span class="hero__title-line"><span>Your Day.</span></span>
+                </h1>
+
+                <p class="hero__subtitle">
+                  Discover the true art of specialty coffee. Handcrafted from 100% single-origin Arabica beans, precision roasted and poured into artisan Mino porcelain.
+                </p>
+
+                <div class="hero__actions">
+                  <a href="#menu" class="btn btn--primary">
+                    <span>Explore Our Menu</span>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                  </a>
+                  <a href="#reservation" class="btn btn--secondary">
+                    <span>Book a Table</span>
+                  </a>
+                </div>
+
+                <!-- Trust Metrics Badges -->
+                <div class="hero__trust-grid" aria-label="Customer highlights">
+                  <div class="trust-pill">
+                    <span class="trust-pill__stars">★★★★★</span>
+                    <span class="trust-pill__text"><strong>4.9 / 5</strong> (2,800+ Reviews)</span>
+                  </div>
+                  <div class="trust-pill">
+                    <span class="trust-pill__icon">🌿</span>
+                    <span class="trust-pill__text"><strong>100%</strong> Organic Arabica</span>
+                  </div>
+                  <div class="trust-pill">
+                    <span class="trust-pill__icon">⚡</span>
+                    <span class="trust-pill__text"><strong>93.5°C</strong> Thermal Extraction</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Floating interactive cue -->
+              <div class="hero__interaction-hint" aria-hidden="true">
+                <div class="mouse-icon">
+                  <div class="mouse-icon__wheel"></div>
+                </div>
+                <span class="mouse-icon__text">DRAG 3D CUP · SCROLL TO ROTATE</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ─── FEATURES PILLARS BANNER ─── -->
+        <section class="section-banner" aria-label="Why choose Coffea">
+          <div class="section__container">
+            <div class="features-grid reveal">
+              <div class="feature-item">
+                <div class="feature-item__icon">☕</div>
+                <div class="feature-item__text">
+                  <h4>High Quality Beans</h4>
+                  <p>100% shade-grown Arabica ethically sourced from family micro-lots.</p>
+                </div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-item__icon">🔥</div>
+                <div class="feature-item__text">
+                  <h4>Master Roasters</h4>
+                  <p>Small-batch Nordic profile roasted daily in cast-iron drum roasters.</p>
+                </div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-item__icon">🏺</div>
+                <div class="feature-item__text">
+                  <h4>Mino Ceramics</h4>
+                  <p>Hand-thrown bone china porcelain crafted to preserve crema warmth.</p>
+                </div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-item__icon">🌿</div>
+                <div class="feature-item__text">
+                  <h4>Cozy Ambiance</h4>
+                  <p>Architectural daylight, serene acoustics, and welcoming hospitality.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ─── 02 / ABOUT SECTION ─── -->
+        <section id="about" class="section section--about" data-section="about" aria-labelledby="about-title">
+          <div class="section__container">
+            <div class="about__grid">
+              <div class="about__narrative">
+                <span class="section__eyebrow reveal">02 / ABOUT COFFEA</span>
+                <h2 id="about-title" class="section__title reveal">We Create The Delicious Coffee Memory You Love</h2>
+                
+                <p class="about__lede reveal">
+                  Founded in 2012 in Seattle, Coffea was born out of a deep reverence for the farmers who cultivate exceptional cherries and a passion for architectural minimalism.
+                </p>
+
+                <p class="about__body-text reveal">
+                  Every step—from evaluating green bean moisture at origin to profiling roast curves and calibrating water mineral content—is executed with obsessive culinary precision.
+                </p>
+
+                <!-- Value Checklist -->
+                <div class="about__checklist reveal">
+                  <div class="check-item">
+                    <span class="check-icon">✓</span>
+                    <span>Direct Trade transparency paying 340% above market minimums</span>
+                  </div>
+                  <div class="check-item">
+                    <span class="check-icon">✓</span>
+                    <span>100% organic, traceable micro-lot harvests with cupping scores 88+</span>
+                  </div>
+                  <div class="check-item">
+                    <span class="check-icon">✓</span>
+                    <span>Certified master baristas trained in latte art and sensory cupping</span>
+                  </div>
+                  <div class="check-item">
+                    <span class="check-icon">✓</span>
+                    <span>Custom dual-boiler PID machines with gentle 6-second pre-infusion</span>
+                  </div>
+                </div>
+
+                <div class="about__stats reveal" role="list" aria-label="Key metrics">
+                  <div class="stat-pill" role="listitem">
+                    <span class="stat-pill__num" data-count="14">0</span>
+                    <span class="stat-pill__suffix">+</span>
+                    <span class="stat-pill__label">Years Experience</span>
+                  </div>
+                  <div class="stat-pill" role="listitem">
+                    <span class="stat-pill__num" data-count="52">0</span>
+                    <span class="stat-pill__suffix">+</span>
+                    <span class="stat-pill__label">Origin Partners</span>
+                  </div>
+                  <div class="stat-pill" role="listitem">
+                    <span class="stat-pill__num" data-count="180">0</span>
+                    <span class="stat-pill__suffix">k+</span>
+                    <span class="stat-pill__label">Cups Poured</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Visual Card Stack (Coffea Specification Deck) -->
+              <div class="about__stack-col reveal">
+                <div class="tactile-card-stack" id="tactile-stack" aria-hidden="true">
+                  <div class="tactile-card tactile-card--1">
+                    <div class="tactile-card__header">
+                      <span class="tactile-card__tag">VESSEL SPEC</span>
+                      <span class="tactile-card__id">MC-01</span>
+                    </div>
+                    <div class="tactile-card__body">
+                      <h4>Mino Bone China</h4>
+                      <p>High-fired 1,320°C feldspathic glaze. 24K gold foil lip trim with balanced handle geometry.</p>
+                    </div>
+                    <div class="tactile-card__footer">
+                      <span>ORIGIN: GIFU, JAPAN</span>
+                      <span>160ML SERVE</span>
+                    </div>
+                  </div>
+
+                  <div class="tactile-card tactile-card--2">
+                    <div class="tactile-card__header">
+                      <span class="tactile-card__tag">ROAST PROFILE</span>
+                      <span class="tactile-card__id">RS-04</span>
+                    </div>
+                    <div class="tactile-card__body">
+                      <h4>Nordic Light-Medium</h4>
+                      <p>Cast-iron drum development preserving jasmine and stone fruit aromatics.</p>
+                    </div>
+                    <div class="tactile-card__footer">
+                      <span>BATCH: 12KG</span>
+                      <span>DEV: 13.5%</span>
+                    </div>
+                  </div>
+
+                  <div class="tactile-card tactile-card--3">
+                    <div class="tactile-card__header">
+                      <span class="tactile-card__tag">EXTRACTION</span>
+                      <span class="tactile-card__id">EX-09</span>
+                    </div>
+                    <div class="tactile-card__body">
+                      <h4>Golden Crema Tulip</h4>
+                      <p>Micro-textured whole milk folded into rich espresso crema at 62°C.</p>
+                    </div>
+                    <div class="tactile-card__footer">
+                      <span>TEMP: 93.5°C</span>
+                      <span>TIME: 27 SEC</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ─── 03 / MENU SECTION ─── -->
+        <section id="menu" class="section section--menu" data-section="menu" aria-labelledby="menu-title">
+          <div class="section__container">
+            <div class="editorial-header text-center reveal">
+              <span class="section__eyebrow">03 / SPECIALTY MENU</span>
+              <h2 id="menu-title" class="section__title">Discover Our Best Coffee Selection</h2>
+              <p class="section__lede max-w-md mx-auto">
+                Calibrated daily by our head barista. Served hot, over crystal ice, or brewed as a pour-over.
+              </p>
+            </div>
+
+            <!-- Category Filter Tabs -->
+            <div class="menu__tabs-wrapper reveal">
+              <div class="menu__categories" id="menu-categories" role="tablist" aria-label="Menu categories">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+
+            <!-- Dynamic Menu Grid -->
+            <div class="menu__grid" id="menu-grid" role="list">
+              <!-- Injected via JS -->
+            </div>
+
+            <div class="menu__footer-note reveal">
+              <span>* ALL BEVERAGES PREPARED WITH FILTERED MOUNTAIN SPRING WATER &amp; ORGANIC MILKS.</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ─── 04 / TABLE & TASTING RESERVATION ─── -->
+        <section id="reservation" class="section section--reservation" data-section="reservation" aria-labelledby="reservation-title">
+          <div class="section__container">
+            <div class="reservation__card reveal">
+              <div class="reservation__content">
+                <span class="section__eyebrow">04 / BOOK A TABLE</span>
+                <h2 id="reservation-title" class="section__title">Reserve Your Coffee Tasting Table</h2>
+                <p class="reservation__desc">
+                  Experience a private cupping flight or reserve a peaceful morning table at our Seattle roastery. Walk-ins always welcome at the main espresso bar.
+                </p>
+
+                <div class="reservation__perks">
+                  <div class="perk-item">
+                    <span class="perk-icon">✦</span>
+                    <span>Guaranteed seating during peak morning hours</span>
+                  </div>
+                  <div class="perk-item">
+                    <span class="perk-icon">✦</span>
+                    <span>Complimentary single-origin espresso welcome shot</span>
+                  </div>
+                  <div class="perk-item">
+                    <span class="perk-icon">✦</span>
+                    <span>Tasting flight accompanied by master roaster notes</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Interactive Booking Form -->
+              <div class="reservation__form-wrap">
+                <form id="reservation-form" class="coffea-form" novalidate>
+                  <div class="form-row">
+                    <div class="form__group">
+                      <input type="text" id="res-name" name="name" class="form__input" required autocomplete="name" placeholder=" ">
+                      <label for="res-name" class="form__label">Full Name</label>
+                      <span class="form__underline"></span>
+                    </div>
+                    <div class="form__group">
+                      <input type="email" id="res-email" name="email" class="form__input" required autocomplete="email" placeholder=" ">
+                      <label for="res-email" class="form__label">Email Address</label>
+                      <span class="form__underline"></span>
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="form__group">
+                      <input type="date" id="res-date" name="date" class="form__input" required>
+                      <label for="res-date" class="form__label">Date</label>
+                      <span class="form__underline"></span>
+                    </div>
+                    <div class="form__group">
+                      <select id="res-guests" name="guests" class="form__input form__input--select" required>
+                        <option value="1">1 Person</option>
+                        <option value="2" selected>2 People</option>
+                        <option value="3">3 People</option>
+                        <option value="4">4 People</option>
+                        <option value="5+">5+ People (Group)</option>
+                      </select>
+                      <label for="res-guests" class="form__label">Guests</label>
+                      <span class="form__underline"></span>
+                    </div>
+                  </div>
+
+                  <div class="form__group">
+                    <select id="res-experience" name="experience" class="form__input form__input--select">
+                      <option value="table">Standard Morning Table Reservation</option>
+                      <option value="flight">3-Origin Sensory Cupping Flight ($18/person)</option>
+                      <option value="roastery">Behind-The-Scenes Roastery Tour</option>
+                    </select>
+                    <label for="res-experience" class="form__label">Experience Type</label>
+                    <span class="form__underline"></span>
+                  </div>
+
+                  <button type="submit" class="btn btn--primary btn--full form__submit">
+                    <span>Confirm Table Reservation</span>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                  </button>
+                  <p class="form__note" id="res-note" aria-live="polite"></p>
+                </form>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ─── 05 / TESTIMONIALS & REVIEWS ─── -->
+        <section id="reviews" class="section section--reviews" data-section="reviews" aria-labelledby="reviews-title">
+          <div class="section__container">
+            <div class="editorial-header text-center reveal">
+              <span class="section__eyebrow">05 / PATRON REVIEWS</span>
+              <h2 id="reviews-title" class="section__title">Loved by Coffee Connoisseurs</h2>
+              <p class="section__lede max-w-md mx-auto">
+                Read what food critics, baristas, and daily regulars say about the Coffea experience.
+              </p>
+            </div>
+
+            <div class="reviews__grid reveal">
+              <article class="review-card" role="listitem">
+                <div class="review-card__header">
+                  <div class="review-card__stars" aria-label="5 stars">★★★★★</div>
+                  <span class="review-card__date">OCT 2026</span>
+                </div>
+                <p class="review-card__quote">
+                  "The Gesha pour-over in their custom Mino porcelain vessel is hands-down the finest cup in the Pacific Northwest. Crisp notes of bergamot and jasmine."
+                </p>
+                <div class="review-card__author">
+                  <div class="author-avatar">EL</div>
+                  <div class="author-meta">
+                    <strong>Elena Rostova</strong>
+                    <span>Specialty Coffee Guild</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="review-card review-card--featured" role="listitem">
+                <div class="review-card__header">
+                  <div class="review-card__stars" aria-label="5 stars">★★★★★</div>
+                  <span class="review-card__date">SEP 2026</span>
+                </div>
+                <p class="review-card__quote">
+                  "Coffea manages to pair Japanese ceramic mastery with world-class roasting. The flat white has a silky microfoam consistency that stays velvety to the final sip."
+                </p>
+                <div class="review-card__author">
+                  <div class="author-avatar">MT</div>
+                  <div class="author-meta">
+                    <strong>Marcus Thorne</strong>
+                    <span>Seattle Food &amp; Wine</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="review-card" role="listitem">
+                <div class="review-card__header">
+                  <div class="review-card__stars" aria-label="5 stars">★★★★★</div>
+                  <span class="review-card__date">NOV 2026</span>
+                </div>
+                <p class="review-card__quote">
+                  "A sanctuary of daylight, warm wood, and incredible espresso aroma. Their 18-hour Kyoto cold brew tower is an absolute revelation."
+                </p>
+                <div class="review-card__author">
+                  <div class="author-avatar">SA</div>
+                  <div class="author-meta">
+                    <strong>Sophia Anderson</strong>
+                    <span>Daily Patron</span>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <!-- ─── 06 / VISIT & CONTACT ─── -->
+        <section id="contact" class="section section--contact" data-section="contact" aria-labelledby="contact-title">
+          <div class="section__container">
+            <div class="contact__grid">
+              <div class="contact__info">
+                <span class="section__eyebrow reveal">06 / VISIT COFFEA</span>
+                <h2 id="contact-title" class="section__title reveal">Our Roastery &amp; Bar</h2>
+                <p class="contact__intro reveal">
+                  Our doors open daily at 6:30 AM. Come watch small batches roasted in person while enjoying fresh single-origin espresso.
+                </p>
+
+                <div class="contact__cards">
+                  <div class="info-card reveal">
+                    <div class="info-card__icon" aria-hidden="true">📍</div>
+                    <div class="info-card__body">
+                      <span class="info-card__label">ADDRESS</span>
+                      <p class="info-card__val">123 Coffee Lane, Brew District<br>Seattle, WA 98101</p>
+                      <button class="info-card__copy-btn" id="copy-address-btn" type="button">Copy Coordinates</button>
+                    </div>
+                  </div>
+
+                  <div class="info-card reveal">
+                    <div class="info-card__icon" aria-hidden="true">🕐</div>
+                    <div class="info-card__body">
+                      <span class="info-card__label">OPENING HOURS</span>
+                      <div class="hours-row">
+                        <span>Monday — Friday</span>
+                        <span>06:30 — 19:30</span>
+                      </div>
+                      <div class="hours-row">
+                        <span>Saturday — Sunday</span>
+                        <span>07:00 — 20:00</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="info-card reveal">
+                    <div class="info-card__icon" aria-hidden="true">✉️</div>
+                    <div class="info-card__body">
+                      <span class="info-card__label">CONCIERGE &amp; ORDERS</span>
+                      <a href="tel:+12065550123" class="contact-link">(206) 555-0123</a>
+                      <a href="mailto:hello@coffeacafe.com" class="contact-link">concierge@coffeacafe.com</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Quick Message Form -->
+              <div class="contact__form-col reveal">
+                <div class="contact__form-wrapper">
+                  <div class="form-header">
+                    <span class="form-tag">DIRECT INQUIRY</span>
+                    <h3 class="contact__form-title">Send a Quick Message</h3>
+                    <p class="form-sub">Wholesale bean orders, private events, or feedback.</p>
+                  </div>
+
+                  <form id="contact-form" class="coffea-form" novalidate>
+                    <div class="form__group">
+                      <input type="text" id="name" name="name" class="form__input" required autocomplete="name" placeholder=" ">
+                      <label for="name" class="form__label">Your Name</label>
+                      <span class="form__underline"></span>
+                    </div>
+                    <div class="form__group">
+                      <input type="email" id="email" name="email" class="form__input" required autocomplete="email" placeholder=" ">
+                      <label for="email" class="form__label">Email Address</label>
+                      <span class="form__underline"></span>
+                    </div>
+                    <div class="form__group">
+                      <textarea id="message" name="message" class="form__input form__input--textarea" rows="3" required placeholder=" "></textarea>
+                      <label for="message" class="form__label">Your Message</label>
+                      <span class="form__underline"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn--primary btn--full form__submit">
+                      <span>Send Message</span>
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </button>
+                    <p class="form__note" id="contact-note" aria-live="polite"></p>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- ─── COFFEA DARK ESPRESSO FOOTER ─── -->
+      <footer class="footer" role="contentinfo">
+        <div class="footer__container">
+          <div class="footer__top-row">
+            <div class="footer__brand-block">
+              <a href="#hero" class="footer__logo">
+                <span class="footer__logo-mark" aria-hidden="true">☕</span>
+                <span class="footer__logo-text">Coffea</span>
+              </a>
+              <p class="footer__manifesto">
+                Honoring origin, roasting with intention, and serving coffee that completes your day. Seattle, Washington.
+              </p>
+              
+              <!-- Newsletter Subscription Box (matching Coffea template) -->
+              <div class="footer__newsletter">
+                <span class="newsletter-label">JOIN OUR ROAST CLUB</span>
+                <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Thank you for subscribing to Coffea Roast Club!');">
+                  <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
+                  <button type="submit" class="newsletter-btn">Subscribe</button>
+                </form>
+              </div>
+            </div>
+
+            <div class="footer__links-grid">
+              <div class="footer__col">
+                <span class="footer__col-title">NAVIGATION</span>
+                <a href="#hero" class="footer__link">01 Home</a>
+                <a href="#about" class="footer__link">02 About Us</a>
+                <a href="#menu" class="footer__link">03 Specialty Menu</a>
+                <a href="#reservation" class="footer__link">04 Book Table</a>
+                <a href="#reviews" class="footer__link">05 Patron Reviews</a>
+                <a href="#contact" class="footer__link">06 Visit Roastery</a>
+              </div>
+              <div class="footer__col">
+                <span class="footer__col-title">COFFEE SPECIALTIES</span>
+                <a href="#menu" class="footer__link">Gesha Single-Origin</a>
+                <a href="#menu" class="footer__link">Slow-Drip Kyoto Cold Brew</a>
+                <a href="#menu" class="footer__link">Mino Ceramic Flat White</a>
+                <a href="#menu" class="footer__link">Aeropress Sensory Flight</a>
+                <a href="#about" class="footer__link">Mino Ceramic Vessels</a>
+              </div>
+              <div class="footer__col">
+                <span class="footer__col-title">HOURS &amp; LOCATION</span>
+                <span class="footer__text-line">123 Coffee Lane, Seattle, WA</span>
+                <span class="footer__text-line">Mon — Fri: 06:30 – 19:30</span>
+                <span class="footer__text-line">Sat — Sun: 07:00 – 20:00</span>
+                <span class="footer__text-line status-accent">● Roasting Fresh Today</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="footer__bottom-bar">
+            <p class="footer__copy">&copy; 2026 Coffea Specialty Coffee Co. All rights reserved. Crafted from the Coffea Template.</p>
+            <div class="footer__legal">
+              <a href="#" class="footer__legal-link">Privacy Policy</a>
+              <span class="footer__sep">/</span>
+              <a href="#" class="footer__legal-link">Terms of Service</a>
+              <span class="footer__sep">/</span>
+              <a href="#" class="footer__legal-link">Sourcing Transparency</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <script nomodule>!function(){var e=document,t=e.createElement("script");if(!("noModule"in t)&&"onbeforeload"in t){var n=!1;e.addEventListener("beforeload",(function(e){if(e.target===t)n=!0;else if(!e.target.hasAttribute("nomodule")||!n)return;e.preventDefault()}),!0),t.type="module",t.src=".",e.head.appendChild(t),t.remove()}}();</script>
+  <script nomodule crossorigin id="vite-legacy-polyfill" src="/assets/js/polyfills-legacy-BsCRbtnO.js"></script>
+  <script nomodule crossorigin id="vite-legacy-entry" data-src="/assets/js/index-legacy-DB84jOCV.js">System.import(document.getElementById('vite-legacy-entry').getAttribute('data-src'))</script>
+</body>
+</html>

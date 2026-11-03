@@ -1,0 +1,27 @@
+{
+  "name": "cafe-3d-scroll",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "High-end 3D scroll cafe website - 2026 trending experience",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint src --ext js",
+    "format": "prettier --write \"src/**/*.{js,css,html}\""
+  },
+  "dependencies": {
+    "three": "^0.160.0",
+    "gsap": "^3.12.5"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0",
+    "@vitejs/plugin-legacy": "^5.0.0",
+    "eslint": "^8.56.0",
+    "prettier": "^3.2.0",
+    "rollup-plugin-visualizer": "^5.12.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
