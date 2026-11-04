@@ -86,10 +86,15 @@
           </div>
         </div>
 
-        <div class="hero-visual scroll-reveal" id="hero-visual" data-parallax="true">
-          <div class="hero-cup-wrap" id="hero-cup-wrap">
-            <img src="/images/hero-cup.jpg" alt="A freshly brewed cup of rich artisan coffee with latte art on a saucer surrounded by roasted beans" class="hero-cup-img" id="hero-cup-img">
+        <div class="hero-visual scroll-reveal" id="hero-visual">
+          <div class="hero-3d-wrapper" id="hero-3d-wrapper">
+            <canvas id="hero-3d-canvas" class="hero-3d-canvas" aria-label="Interactive 3D artisan coffee cup with latte art and floating roasted beans"></canvas>
+            <img src="/images/hero-cup.jpg" alt="A freshly brewed cup of rich artisan coffee with latte art on a saucer surrounded by roasted beans" class="hero-cup-img hero-fallback-img" id="hero-fallback-img">
             <div class="hero-cup-glow" id="hero-cup-glow" aria-hidden="true"></div>
+          </div>
+          <div class="hero-3d-cue" aria-hidden="true">
+            <span class="cue-dot"></span>
+            <span class="cue-text">INTERACTIVE 3D · SCROLL TO DISPERSE BEANS</span>
           </div>
         </div>
 

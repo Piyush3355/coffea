@@ -1,6 +1,7 @@
 import './styles/main.css';
+import { Hero3DScene } from './hero3d.js';
 
-console.log('☕ Coffea Coffee Shop & Bakery — Clean UI with Smooth Scroll Transitions');
+console.log('☕ Coffea Coffee Shop & Bakery — Clean UI with 3D Starting Hero Animation');
 
 // ─── PRODUCT CATALOG (COFFEE, DESSERTS & BEANS) ─────────────────────────────
 const CATALOG = [
@@ -149,11 +150,8 @@ function showToast(message, icon = '☕') {
 // ─── 00 / SCROLL PROGRESS BAR & PARALLAX ────────────────────────────────────
 function setupScrollProgressAndParallax() {
   const progressBar = document.getElementById('scroll-progress-bar');
-  const heroVisual = document.getElementById('hero-cup-wrap');
   const scrollBtn = document.getElementById('scroll-to-top-btn');
   const header = document.getElementById('site-header');
-
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   let ticking = false;
 
@@ -183,13 +181,6 @@ function setupScrollProgressAndParallax() {
       } else {
         scrollBtn.classList.remove('is-visible');
       }
-    }
-
-    // 4. Subtle Parallax on Hero Cup (clean, non-blocking)
-    if (!prefersReducedMotion && heroVisual && scrollY < window.innerHeight * 1.2) {
-      const translateY = scrollY * 0.12;
-      const rotate = scrollY * 0.012;
-      heroVisual.style.transform = `translate3d(0, ${translateY}px, 0) rotate(${rotate}deg)`;
     }
 
     ticking = false;
@@ -789,6 +780,13 @@ function setupScrollSpy() {
 
 // ─── INITIALIZE APPLICATION ─────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
+  // Initialize 3D Hero Experience
+  const heroCanvas = document.getElementById('hero-3d-canvas');
+  const heroFallback = document.getElementById('hero-fallback-img');
+  if (heroCanvas) {
+    new Hero3DScene(heroCanvas, heroFallback);
+  }
+
   cart.init();
   wishlist.init();
   setupScrollProgressAndParallax();
