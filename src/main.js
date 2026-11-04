@@ -1,1359 +1,652 @@
 import './styles/main.css';
 
-import * as THREE from 'three';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+console.log('☕ Coffea Coffee Shop & Bakery — Clean Responsive UI Initialized');
 
-gsap.registerPlugin(ScrollTrigger);
+// ─── PRODUCT CATALOG (COFFEE, DESSERTS & BEANS) ─────────────────────────────
+const CATALOG = [
+  // Coffees
+  {
+    id: 'c-1',
+    name: 'Lungo coffee',
+    category: 'hot-coffee',
+    price: 200,
+    priceDisplay: 'Rs. 200',
+    desc: 'Rich double shot espresso pulled with extended water volume for aromatic smoothness.',
+    img: '/images/coffee-1.jpg'
+  },
+  {
+    id: 'c-2',
+    name: 'Caramel Macchiato',
+    category: 'hot-coffee',
+    price: 240,
+    priceDisplay: 'Rs. 240',
+    desc: 'Steamed velvety milk marked with intense espresso and crowned with artisanal buttery caramel drizzle.',
+    img: '/images/coffee-2.jpg'
+  },
+  {
+    id: 'c-3',
+    name: 'Vanilla Cappuccino',
+    category: 'hot-coffee',
+    price: 220,
+    priceDisplay: 'Rs. 220',
+    desc: 'Equal parts bold espresso, hot milk, and thick foam dusted with real Madagascar vanilla pod.',
+    img: '/images/coffee-3.jpg'
+  },
+  {
+    id: 'c-4',
+    name: 'Hazelnut Flat White',
+    category: 'hot-coffee',
+    price: 250,
+    priceDisplay: 'Rs. 250',
+    desc: 'Delicate micro-foam infused with roasted Piedmont hazelnuts poured over a bold double ristretto.',
+    img: '/images/coffee-4.jpg'
+  },
+  {
+    id: 'c-5',
+    name: 'Nitro Cold Brew',
+    category: 'cold-coffee',
+    price: 260,
+    priceDisplay: 'Rs. 260',
+    desc: '18-hour cold steeped single-origin coffee infused with nitrogen for a creamy, naturally sweet head.',
+    img: '/images/coffee-5.jpg'
+  },
+  {
+    id: 'c-6',
+    name: 'Origin Espresso',
+    category: 'cup-coffee',
+    price: 180,
+    priceDisplay: 'Rs. 180',
+    desc: 'Washed Ethiopian Yirgacheffe pulling vibrant citrus sweetness, jasmine florality, and dark chocolate.',
+    img: '/images/coffee-6.jpg'
+  },
 
-console.log('☕ Coffea Specialty Coffee 3D Initialized — Interactive Pouring & Serving Experience');
+  // Desserts
+  {
+    id: 'd-1',
+    name: 'Butter Croissant',
+    category: 'dessert',
+    price: 160,
+    priceDisplay: 'Rs. 160',
+    desc: 'Authentic flaky French pastry laminated with pure cultured Normandy butter, baked fresh every morning.',
+    img: '/images/dessert-1.jpg'
+  },
+  {
+    id: 'd-2',
+    name: 'Classic Tiramisu',
+    category: 'dessert',
+    price: 260,
+    priceDisplay: 'Rs. 260',
+    desc: 'Espresso-drenched Savoiardi biscuits layered with light mascarpone mousse and Valrhona cocoa.',
+    img: '/images/dessert-2.jpg'
+  },
+  {
+    id: 'd-3',
+    name: 'New York Cheesecake',
+    category: 'dessert',
+    price: 280,
+    priceDisplay: 'Rs. 280',
+    desc: 'Velvety dense cream cheese on a cinnamon-graham crust, kissed with real Madagascar vanilla bean.',
+    img: '/images/dessert-3.jpg'
+  },
+  {
+    id: 'd-4',
+    name: 'Chocolate Tart',
+    category: 'dessert',
+    price: 240,
+    priceDisplay: 'Rs. 240',
+    desc: 'Crisp sablé shell brimming with 70% dark Belgian ganache and topped with toasted whole hazelnuts.',
+    img: '/images/dessert-4.jpg'
+  },
+  {
+    id: 'd-5',
+    name: 'Cinnamon Roll',
+    category: 'dessert',
+    price: 180,
+    priceDisplay: 'Rs. 180',
+    desc: 'Pillowy brioche dough twisted with fragrant Ceylon cinnamon butter and frosted with cream glaze.',
+    img: '/images/dessert-5.jpg'
+  },
+  {
+    id: 'd-6',
+    name: 'Wild Berry Galette',
+    category: 'dessert',
+    price: 220,
+    priceDisplay: 'Rs. 220',
+    desc: 'Free-form butter crust stuffed with fresh mountain blackberries, blueberries, and fragrant lemon zest.',
+    img: '/images/dessert-6.jpg'
+  },
 
-// ─── COFFEA CURATED MENU DATA ───────────────────────────────────────────────
-
-const MENU_ITEMS = [
+  // Coffee Beans Promo Item
   {
-    name: 'Caramel Macchiato Gold',
-    price: '$5.50',
-    desc: 'Freshly steamed milk with vanilla-flavored syrup marked with espresso and topped with rich caramel drizzle.',
-    category: 'Hot Coffee',
-    origin: 'House Blend',
-    tags: ['Signature', 'Sweet Crema', 'Caramel'],
-    icon: '☕'
-  },
-  {
-    name: 'Gesha Reserve Pour-Over',
-    price: '$8.50',
-    desc: 'Cerro Azul, Colombia · Bright bergamot, white peach, jasmine floral finish. Hand-dripped on Kalita Wave.',
-    category: 'Hot Coffee',
-    origin: 'Colombia',
-    tags: ['Single-Origin', 'Washed', 'Lot #12'],
-    icon: '🫖'
-  },
-  {
-    name: 'Mino Ceramic Flat White',
-    price: '$5.75',
-    desc: 'Double ristretto folded with silky micro-foam in our signature hand-thrown Mino bone china porcelain.',
-    category: 'Espresso Bar',
-    origin: 'Guatemala',
-    tags: ['Velvety', 'Organic', 'Hazelnut'],
-    icon: '🥛'
-  },
-  {
-    name: 'Nitro Cascade Cold Brew',
-    price: '$6.25',
-    desc: '18-hour slow steep infused with nitrogen for a creamy, cascading pour and naturally sweet stout-like head.',
-    category: 'Cold Brews',
-    origin: 'Kenya AA',
-    tags: ['Nitro', 'Velvet', 'Zero Sugar'],
-    icon: '🍺'
-  },
-  {
-    name: 'Ethiopian Heirloom Cortado',
-    price: '$5.00',
-    desc: 'Equal parts 1:1 espresso and steamed oat milk. Candied citrus notes and dark chocolate truffle body.',
-    category: 'Espresso Bar',
-    origin: 'Yirgacheffe',
-    tags: ['Natural', 'Oat', 'Citrus'],
-    icon: '🌾'
-  },
-  {
-    name: 'Kyoto Tower Slow Drip',
-    price: '$6.75',
-    desc: 'Single-drop ice water extraction tower. Intense winey clarity and delicate floral fragrance.',
-    category: 'Cold Brews',
-    origin: 'Ethiopia',
-    tags: ['18h Tower', 'Chilled', 'Winey'],
-    icon: '🧊'
-  },
-  {
-    name: 'Ceremonial Matcha Blossom',
-    price: '$6.00',
-    desc: 'First-harvest shade-grown green tea from Uji, Kyoto. Whisked tableside with steamed oat milk.',
-    category: 'Hot Coffee',
-    origin: 'Kyoto, Japan',
-    tags: ['Ceremonial', 'Antioxidant', 'Oat'],
-    icon: '🍵'
-  },
-  {
-    name: 'Artisan Butter Croissant',
-    price: '$4.25',
-    desc: 'Baked fresh every morning using cultured Normandy butter. Flaky exterior with honey honeycomb crumb.',
-    category: 'Artisan Bakery',
-    origin: 'In-House Bakery',
-    tags: ['Fresh Daily', 'French Butter'],
-    icon: '🥐'
-  },
-  {
-    name: 'Cold Drip Citrus Tonic',
-    price: '$6.50',
-    desc: 'Cold brew poured over artisanal tonic water and fresh cold-pressed Mediterranean yuzu zest.',
-    category: 'Cold Brews',
-    origin: 'Colombia',
-    tags: ['Sparkling', 'Refreshing', 'Yuzu'],
-    icon: '🍋'
+    id: 'b-1',
+    name: 'Artisan Whole Beans (250g)',
+    category: 'beans',
+    price: 450,
+    priceDisplay: 'Rs. 450',
+    desc: 'Ethically sourced single-origin micro-lot roasted to medium Scandinavian sweetness.',
+    img: '/images/beans-banner.jpg'
   }
 ];
 
-// Top-Level Dynamic Telemetry per Section
-const SECTION_TELEMETRY = {
-  hero: {
-    num: '01 / 06',
-    chips: ['BARISTA POURING · 93.5°C'],
-    cta: 'Menu',
-    link: '#menu'
+// ─── TOAST NOTIFICATIONS ────────────────────────────────────────────────────
+function showToast(message, icon = '☕') {
+  const container = document.getElementById('toast-container');
+  if (!container) return;
+
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+  toast.innerHTML = `<span>${icon}</span><span>${message}</span>`;
+  container.appendChild(toast);
+
+  setTimeout(() => {
+    toast.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
+    toast.style.opacity = '0';
+    toast.style.transform = 'translateY(10px)';
+    setTimeout(() => toast.remove(), 260);
+  }, 2600);
+}
+
+// ─── CART / ORDER DRAWER STATE & ACTIONS ────────────────────────────────────
+const cart = {
+  items: [],
+
+  init() {
+    try {
+      const saved = localStorage.getItem('coffea_cart');
+      if (saved) {
+        this.items = JSON.parse(saved);
+      }
+    } catch (_e) {
+      this.items = [];
+    }
+    this.render();
   },
-  about: {
-    num: '02 / 06',
-    chips: ['MINO CERAMIC BONE CHINA'],
-    cta: 'Story',
-    link: '#about'
+
+  save() {
+    try {
+      localStorage.setItem('coffea_cart', JSON.stringify(this.items));
+    } catch (_e) {
+      // storage unavailable
+    }
   },
-  menu: {
-    num: '03 / 06',
-    chips: ['9 CURATED SPECIALTIES'],
-    cta: 'Filter',
-    link: '#menu'
+
+  addItem(productId) {
+    const product = CATALOG.find((p) => p.id === productId);
+    if (!product) return;
+
+    const existing = this.items.find((item) => item.id === productId);
+    if (existing) {
+      existing.qty += 1;
+    } else {
+      this.items.push({
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        img: product.img,
+        qty: 1
+      });
+    }
+
+    this.save();
+    this.render();
+    showToast(`Added ${product.name} to order!`, '✓');
   },
-  reservation: {
-    num: '04 / 06',
-    chips: ['TABLES & FLIGHTS OPEN'],
-    cta: 'Book',
-    link: '#reservation'
+
+  updateQty(productId, delta) {
+    const item = this.items.find((i) => i.id === productId);
+    if (!item) return;
+
+    item.qty += delta;
+    if (item.qty <= 0) {
+      this.items = this.items.filter((i) => i.id !== productId);
+    }
+
+    this.save();
+    this.render();
   },
-  reviews: {
-    num: '05 / 06',
-    chips: ['★ 4.9/5 · 2,800+ REVIEWS'],
-    cta: 'Reviews',
-    link: '#reviews'
+
+  removeItem(productId) {
+    this.items = this.items.filter((i) => i.id !== productId);
+    this.save();
+    this.render();
   },
-  contact: {
-    num: '06 / 06',
-    chips: ['SEATTLE ROASTERY BAR'],
-    cta: 'Visit',
-    link: '#contact'
+
+  clear() {
+    this.items = [];
+    this.save();
+    this.render();
+  },
+
+  getCount() {
+    return this.items.reduce((sum, item) => sum + item.qty, 0);
+  },
+
+  getSubtotal() {
+    return this.items.reduce((sum, item) => sum + item.price * item.qty, 0);
+  },
+
+  render() {
+    const counter = document.getElementById('cart-counter');
+    const list = document.getElementById('cart-items-list');
+    const subtotalEl = document.getElementById('cart-subtotal');
+
+    const totalCount = this.getCount();
+    if (counter) counter.textContent = totalCount;
+
+    if (subtotalEl) {
+      subtotalEl.textContent = `Rs. ${this.getSubtotal().toLocaleString()}`;
+    }
+
+    if (!list) return;
+
+    if (this.items.length === 0) {
+      list.innerHTML = `
+        <div class="cart-empty-msg">
+          <p>Your order is currently empty.</p>
+          <p style="margin-top: 8px; font-size: 0.8rem; opacity: 0.7;">Select a coffee or fresh pastry to get started.</p>
+        </div>
+      `;
+      return;
+    }
+
+    list.innerHTML = this.items.map((item) => `
+      <div class="cart-item-row" data-id="${item.id}">
+        <img src="${item.img}" alt="${item.name}" class="cart-item-img">
+        <div class="cart-item-details">
+          <div class="cart-item-name">${item.name}</div>
+          <div class="cart-item-price">Rs. ${item.price} each</div>
+        </div>
+        <div class="cart-qty-ctrl">
+          <button class="cart-qty-btn" data-action="decrease" data-id="${item.id}" aria-label="Decrease quantity">−</button>
+          <span class="cart-qty-num">${item.qty}</span>
+          <button class="cart-qty-btn" data-action="increase" data-id="${item.id}" aria-label="Increase quantity">+</button>
+        </div>
+      </div>
+    `).join('');
   }
 };
 
-// ─── PROCEDURAL LATTE ART GENERATOR ─────────────────────────────────────────
+// ─── WISHLIST / FAVORITES ───────────────────────────────────────────────────
+const wishlist = {
+  saved: new Set(),
 
-function createLatteArtTexture() {
-  const canvas = document.createElement('canvas');
-  canvas.width = 1024;
-  canvas.height = 1024;
-  const ctx = canvas.getContext('2d');
-  const cx = 512;
-  const cy = 512;
-  const r = 500;
-
-  const baseGrad = ctx.createRadialGradient(cx, cy, 60, cx, cy, r);
-  baseGrad.addColorStop(0, '#7a421e');
-  baseGrad.addColorStop(0.42, '#5e3015');
-  baseGrad.addColorStop(0.80, '#3f1e0c');
-  baseGrad.addColorStop(0.98, '#261106');
-  baseGrad.addColorStop(1.0, '#150802');
-
-  ctx.fillStyle = baseGrad;
-  ctx.beginPath();
-  ctx.arc(cx, cy, r, 0, Math.PI * 2);
-  ctx.fill();
-
-  for (let i = 0; i < 400; i++) {
-    const angle = Math.random() * Math.PI * 2;
-    const dist = 70 + Math.random() * (r - 110);
-    const px = cx + Math.cos(angle) * dist;
-    const py = cy + Math.sin(angle) * dist;
-    const radius = 2 + Math.random() * 8;
-    ctx.fillStyle = Math.random() > 0.45 ? 'rgba(217, 168, 108, 0.14)' : 'rgba(40, 18, 7, 0.16)';
-    ctx.beginPath();
-    ctx.arc(px, py, radius, 0, Math.PI * 2);
-    ctx.fill();
-  }
-
-  // Barista Steamed Milk Foam Latte Art
-  ctx.save();
-  ctx.translate(cx, cy - 20);
-
-  ctx.shadowColor = 'rgba(70, 32, 10, 0.55)';
-  ctx.shadowBlur = 18;
-
-  const milkColor = '#fffdf7';
-  const milkShadow = '#f2e7d5';
-
-  const tiers = [
-    { y: 160, scaleX: 1.4, scaleY: 0.9, w: 90 },
-    { y: 90,  scaleX: 1.6, scaleY: 1.0, w: 110 },
-    { y: 20,  scaleX: 1.8, scaleY: 1.1, w: 125 },
-    { y: -50, scaleX: 1.7, scaleY: 1.15, w: 115 },
-    { y: -120, scaleX: 1.4, scaleY: 1.1, w: 95 },
-  ];
-
-  tiers.forEach(tier => {
-    ctx.save();
-    ctx.translate(0, tier.y);
-    ctx.scale(tier.scaleX, tier.scaleY);
-
-    const wingGrad = ctx.createRadialGradient(0, 0, 10, 0, 0, tier.w);
-    wingGrad.addColorStop(0, milkColor);
-    wingGrad.addColorStop(0.85, milkShadow);
-    wingGrad.addColorStop(1, 'rgba(230, 210, 185, 0.05)');
-
-    ctx.fillStyle = wingGrad;
-    ctx.beginPath();
-    ctx.moveTo(0, 20);
-    ctx.bezierCurveTo(-tier.w * 0.8, -10, -tier.w, -tier.w * 0.6, 0, -tier.w * 0.85);
-    ctx.bezierCurveTo(tier.w, -tier.w * 0.6, tier.w * 0.8, -10, 0, 20);
-    ctx.closePath();
-    ctx.fill();
-    ctx.restore();
-  });
-
-  // Top crown heart
-  ctx.save();
-  ctx.translate(0, -185);
-  ctx.fillStyle = milkColor;
-  ctx.beginPath();
-  ctx.moveTo(0, 25);
-  ctx.bezierCurveTo(-55, -15, -60, -65, 0, -50);
-  ctx.bezierCurveTo(60, -65, 55, -15, 0, 25);
-  ctx.closePath();
-  ctx.fill();
-  ctx.restore();
-
-  // Central Barista Pour Line
-  ctx.strokeStyle = milkColor;
-  ctx.lineWidth = 14;
-  ctx.lineCap = 'round';
-  ctx.beginPath();
-  ctx.moveTo(0, 240);
-  ctx.lineTo(0, -230);
-  ctx.stroke();
-
-  ctx.fillStyle = milkColor;
-  ctx.beginPath();
-  ctx.arc(0, -235, 7, 0, Math.PI * 2);
-  ctx.fill();
-
-  ctx.restore();
-
-  const rimGrad = ctx.createRadialGradient(cx, cy, r - 25, cx, cy, r);
-  rimGrad.addColorStop(0, 'rgba(217, 168, 108, 0)');
-  rimGrad.addColorStop(0.7, 'rgba(224, 178, 122, 0.28)');
-  rimGrad.addColorStop(1, 'rgba(50, 20, 8, 0.4)');
-  ctx.fillStyle = rimGrad;
-  ctx.beginPath();
-  ctx.arc(cx, cy, r, 0, Math.PI * 2);
-  ctx.fill();
-
-  const texture = new THREE.CanvasTexture(canvas);
-  texture.generateMipmaps = true;
-  texture.minFilter = THREE.LinearMipmapLinearFilter;
-  return texture;
-}
-
-// ─── PROCEDURAL FLOWING COFFEE STREAM TEXTURE ────────────────────────────────
-
-function createStreamTexture() {
-  const canvas = document.createElement('canvas');
-  canvas.width = 128;
-  canvas.height = 512;
-  const ctx = canvas.getContext('2d');
-
-  // Vertical gradient of rich amber and dark espresso
-  const grad = ctx.createLinearGradient(0, 0, 0, 512);
-  grad.addColorStop(0.0, 'rgba(75, 35, 12, 0.95)');
-  grad.addColorStop(0.2, 'rgba(195, 125, 60, 0.9)');
-  grad.addColorStop(0.5, 'rgba(90, 42, 15, 0.95)');
-  grad.addColorStop(0.8, 'rgba(215, 145, 75, 0.85)');
-  grad.addColorStop(1.0, 'rgba(65, 28, 10, 0.95)');
-
-  ctx.fillStyle = grad;
-  ctx.fillRect(0, 0, 128, 512);
-
-  // Subtle vertical flow highlights
-  for (let i = 0; i < 30; i++) {
-    const x = Math.random() * 128;
-    const w = 4 + Math.random() * 12;
-    ctx.fillStyle = 'rgba(255, 200, 130, 0.18)';
-    ctx.fillRect(x, 0, w, 512);
-  }
-
-  const texture = new THREE.CanvasTexture(canvas);
-  texture.wrapS = THREE.RepeatWrapping;
-  texture.wrapT = THREE.RepeatWrapping;
-  texture.repeat.set(1, 2);
-  return texture;
-}
-
-// ─── PROCEDURAL STEAM PARTICLES TEXTURE ──────────────────────────────────────
-
-function createSteamTexture() {
-  const canvas = document.createElement('canvas');
-  canvas.width = 128;
-  canvas.height = 128;
-  const ctx = canvas.getContext('2d');
-
-  const grad = ctx.createRadialGradient(64, 64, 0, 64, 64, 64);
-  grad.addColorStop(0, 'rgba(255, 255, 255, 0.85)');
-  grad.addColorStop(0.35, 'rgba(250, 246, 240, 0.45)');
-  grad.addColorStop(0.7, 'rgba(240, 235, 225, 0.12)');
-  grad.addColorStop(1, 'rgba(240, 235, 225, 0)');
-
-  ctx.fillStyle = grad;
-  ctx.fillRect(0, 0, 128, 128);
-
-  const texture = new THREE.CanvasTexture(canvas);
-  return texture;
-}
-
-// ─── PROCEDURAL AUTHENTIC COFFEE BEAN GEOMETRY ──────────────────────────────
-
-function createAuthenticBeanGeometry() {
-  const geom = new THREE.SphereGeometry(0.18, 28, 20);
-  const pos = geom.attributes.position;
-
-  for (let i = 0; i < pos.count; i++) {
-    let x = pos.getX(i);
-    let y = pos.getY(i);
-    let z = pos.getZ(i);
-
-    x *= 0.92;
-    y *= 0.65;
-    z *= 1.48;
-
-    if (y < 0) {
-      y *= 0.8;
-    }
-
-    const distFromCenter = Math.abs(x);
-    if (y > 0 && distFromCenter < 0.075) {
-      const indentFactor = Math.cos((distFromCenter / 0.075) * (Math.PI / 2));
-      y -= 0.08 * indentFactor;
-    }
-
-    const jitter = Math.sin(x * 15 + z * 12) * 0.004;
-    pos.setXYZ(i, x + jitter, y, z);
-  }
-
-  geom.computeVertexNormals();
-  return geom;
-}
-
-// ─── THREE.JS ATELIER SCENE (POURING & SERVING EXPERIENCE) ───────────────────
-
-class CafeApp {
-  constructor() {
-    this.canvas = document.getElementById('webgl-canvas');
-    this.scene = null;
-    this.camera = null;
-    this.renderer = null;
-    this.clock = new THREE.Clock();
-    this.isInitialized = false;
-
-    // Scroll metrics
-    this.scrollProgress = 0;
-    this.targetScrollProgress = 0;
-    this.scrollVelocity = 0;
-    this.lastScrollY = 0;
-
-    // Mouse metrics
-    this.mouseX = 0;
-    this.mouseY = 0;
-    this.targetMouseX = 0;
-    this.targetMouseY = 0;
-
-    // 3D Model Hierarchy
-    this.servingGroup = null; // Master group scaled down and positioned
-    this.cupGroup = null;
-    this.kettleGroup = null;
-    this.pourStream = null;
-    this.streamTexture = null;
-    this.rippleRings = [];
-    this.coffeeBeans = null;
-    this.steamParticles = null;
-    this.isPageVisible = true;
-
-    this.init();
-  }
-
-  async init() {
+  init() {
     try {
-      this.setupThreeJS();
-      this.setupLighting();
-      this.createStudioEnvironment();
-      this.createServingAndPouringEnsemble();
-      this.createArtisanTabletopBeans();
-      this.createSteamParticleSystem();
-      this.setupEventListeners();
-      this.animate();
-      this.isInitialized = true;
-      console.log('✅ Three.js Coffea Pouring & Serving Scene Ready');
-    } catch (err) {
-      console.error('❌ Three.js setup error:', err);
+      const data = JSON.parse(localStorage.getItem('coffea_wishlist') || '[]');
+      this.saved = new Set(data);
+    } catch (_e) {
+      this.saved = new Set();
     }
-  }
-
-  setupThreeJS() {
-    this.scene = new THREE.Scene();
-
-    // Studio Alabaster Fog matching #fbfaf8
-    this.scene.fog = new THREE.FogExp2(0xfbfaf8, 0.025);
-
-    this.camera = new THREE.PerspectiveCamera(
-      45,
-      window.innerWidth / window.innerHeight,
-      0.1,
-      1000
-    );
-    this.camera.position.set(0, 2.2, 5.6);
-    this.camera.lookAt(0, 1.2, 0);
-
-    this.renderer = new THREE.WebGLRenderer({
-      canvas: this.canvas,
-      antialias: true,
-      alpha: true,
-      powerPreference: 'high-performance',
-      preserveDrawingBuffer: false,
-    });
-    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    this.renderer.setSize(window.innerWidth, window.innerHeight);
-    this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    this.renderer.toneMappingExposure = 1.15;
-    this.renderer.shadowMap.enabled = true;
-    this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-  }
-
-  setupLighting() {
-    const hemiLight = new THREE.HemisphereLight(0xfffdfa, 0xe8e2d8, 1.15);
-    this.scene.add(hemiLight);
-
-    const keyLight = new THREE.DirectionalLight(0xfffaee, 1.85);
-    keyLight.position.set(4, 9, 6);
-    keyLight.castShadow = true;
-    keyLight.shadow.mapSize.width = 1024;
-    keyLight.shadow.mapSize.height = 1024;
-    keyLight.shadow.camera.near = 0.5;
-    keyLight.shadow.camera.far = 30;
-    keyLight.shadow.camera.left = -6;
-    keyLight.shadow.camera.right = 6;
-    keyLight.shadow.camera.top = 6;
-    keyLight.shadow.camera.bottom = -6;
-    keyLight.shadow.bias = -0.0006;
-    keyLight.shadow.radius = 3.5;
-    this.scene.add(keyLight);
-
-    const fillLight = new THREE.DirectionalLight(0xe8f0fa, 0.75);
-    fillLight.position.set(-6, 5, -3);
-    this.scene.add(fillLight);
-
-    const rimLight = new THREE.DirectionalLight(0xfff7ed, 0.95);
-    rimLight.position.set(0, 6, -6);
-    this.scene.add(rimLight);
-  }
-
-  createStudioEnvironment() {
-    const planeGeom = new THREE.PlaneGeometry(35, 35);
-    const shadowMat = new THREE.ShadowMaterial({ opacity: 0.08 });
-    const shadowPlane = new THREE.Mesh(planeGeom, shadowMat);
-    shadowPlane.rotation.x = -Math.PI / 2;
-    shadowPlane.position.y = -0.01;
-    shadowPlane.receiveShadow = true;
-    this.scene.add(shadowPlane);
-  }
-
-  createServingAndPouringEnsemble() {
-    this.servingGroup = new THREE.Group();
-
-    // ── REFINED PROPORTIONAL SCALE ──
-    const isMobile = window.innerWidth < 768;
-    const baseScale = isMobile ? 0.23 : 0.40;
-    this.servingGroup.scale.set(baseScale, baseScale, baseScale);
-
-    // Initial positioning in Hero: on desktop, sits on right half (x = 1.35)
-    this.servingGroup.position.set(isMobile ? 0 : 1.35, isMobile ? -1.15 : 0.08, 0);
-
-    // ── LUXURY MATERIALS ──
-    const porcelainMat = new THREE.MeshPhysicalMaterial({
-      color: 0xfcfbf9,        // Pure Mino Japanese bone china
-      roughness: 0.12,
-      metalness: 0.0,
-      clearcoat: 1.0,
-      clearcoatRoughness: 0.05,
-      ior: 1.52,
-      reflectivity: 0.9,
-    });
-
-    const goldRimMat = new THREE.MeshStandardMaterial({
-      color: 0xd4af37,        // 24K gold foil trim
-      metalness: 0.92,
-      roughness: 0.22,
-    });
-
-    const kettleMat = new THREE.MeshStandardMaterial({
-      color: 0x1f1f22,        // Matte brushed graphite stainless steel
-      metalness: 0.90,
-      roughness: 0.24,
-    });
-
-    const walnutWoodMat = new THREE.MeshStandardMaterial({
-      color: 0x362316,        // Rich dark walnut serving tray
-      roughness: 0.62,
-      metalness: 0.02,
-    });
-
-    const brassMat = new THREE.MeshStandardMaterial({
-      color: 0xd8af48,        // Polished brass barista spoon & knob
-      metalness: 0.95,
-      roughness: 0.18,
-    });
-
-    // ── 1. ARTISAN WALNUT SERVING BOARD (Tray) ──
-    const boardGeom = new THREE.CylinderGeometry(2.5, 2.5, 0.10, 64);
-    const servingBoard = new THREE.Mesh(boardGeom, walnutWoodMat);
-    servingBoard.position.y = -0.05;
-    servingBoard.castShadow = true;
-    servingBoard.receiveShadow = true;
-    this.servingGroup.add(servingBoard);
-
-    // Subtle raised beveled lip on tray edge
-    const lipGeom = new THREE.TorusGeometry(2.46, 0.035, 16, 64);
-    lipGeom.rotateX(Math.PI / 2);
-    lipGeom.translate(0, 0.0, 0);
-    const trayLip = new THREE.Mesh(lipGeom, walnutWoodMat);
-    trayLip.receiveShadow = true;
-    this.servingGroup.add(trayLip);
-
-    // ── 2. BRASS CUPPING & TASTING SPOON (Beside the cup) ──
-    const spoonGroup = new THREE.Group();
-    spoonGroup.position.set(1.50, 0.04, 0.60);
-    spoonGroup.rotation.y = -0.45;
-    spoonGroup.rotation.x = Math.PI / 2;
-
-    const spoonHandleGeom = new THREE.CylinderGeometry(0.022, 0.035, 1.75, 16);
-    const spoonHandle = new THREE.Mesh(spoonHandleGeom, brassMat);
-    spoonHandle.castShadow = true;
-    spoonGroup.add(spoonHandle);
-
-    const spoonBowlGeom = new THREE.SphereGeometry(0.13, 24, 16);
-    spoonBowlGeom.scale(1.0, 1.35, 0.32);
-    const spoonBowl = new THREE.Mesh(spoonBowlGeom, brassMat);
-    spoonBowl.position.y = -0.92;
-    spoonBowl.castShadow = true;
-    spoonGroup.add(spoonBowl);
-
-    this.servingGroup.add(spoonGroup);
-
-    // ── 3. CUP & SAUCER HIERARCHY ──
-    this.cupGroup = new THREE.Group();
-
-    // Ceramic Mino Bone China Cup Body (Hollow with rounded rim)
-    const cupPoints = [
-      new THREE.Vector2(0, 0.04),
-      new THREE.Vector2(0.50, 0.04),
-      new THREE.Vector2(0.54, 0.0),
-      new THREE.Vector2(0.62, 0.0),
-      new THREE.Vector2(0.64, 0.06),
-      new THREE.Vector2(0.72, 0.32),
-      new THREE.Vector2(0.88, 0.72),
-      new THREE.Vector2(1.06, 1.15),
-      new THREE.Vector2(1.18, 1.48),
-      new THREE.Vector2(1.22, 1.62),
-      new THREE.Vector2(1.20, 1.65),
-      new THREE.Vector2(1.16, 1.65),
-      new THREE.Vector2(1.12, 1.60),
-      new THREE.Vector2(1.04, 1.35),
-      new THREE.Vector2(0.90, 0.95),
-      new THREE.Vector2(0.72, 0.55),
-      new THREE.Vector2(0.48, 0.22),
-      new THREE.Vector2(0, 0.18),
-    ];
-    const cupGeom = new THREE.LatheGeometry(cupPoints, 64);
-    cupGeom.computeVertexNormals();
-    const cupMesh = new THREE.Mesh(cupGeom, porcelainMat);
-    cupMesh.castShadow = true;
-    cupMesh.receiveShadow = true;
-    this.cupGroup.add(cupMesh);
-
-    // Cup Ergonomic Handle
-    const handleCurve = new THREE.CatmullRomCurve3([
-      new THREE.Vector3(1.10, 1.38, 0),
-      new THREE.Vector3(1.48, 1.44, 0),
-      new THREE.Vector3(1.78, 1.22, 0),
-      new THREE.Vector3(1.82, 0.92, 0),
-      new THREE.Vector3(1.64, 0.62, 0),
-      new THREE.Vector3(1.30, 0.52, 0),
-      new THREE.Vector3(0.82, 0.54, 0),
-    ]);
-    const handleGeom = new THREE.TubeGeometry(handleCurve, 48, 0.09, 24, false);
-    const handleMesh = new THREE.Mesh(handleGeom, porcelainMat);
-    handleMesh.castShadow = true;
-    handleMesh.receiveShadow = true;
-    this.cupGroup.add(handleMesh);
-
-    // 24K Gold Trim on Cup Rim
-    const rimTorusGeom = new THREE.TorusGeometry(1.18, 0.016, 16, 64);
-    rimTorusGeom.rotateX(Math.PI / 2);
-    rimTorusGeom.translate(0, 1.64, 0);
-    const rimTorus = new THREE.Mesh(rimTorusGeom, goldRimMat);
-    this.cupGroup.add(rimTorus);
-
-    // Coffee Crema Surface with Barista Latte Art
-    const latteArtTexture = createLatteArtTexture();
-    const coffeeGeom = new THREE.CircleGeometry(1.08, 64);
-    const coffeeMat = new THREE.MeshPhysicalMaterial({
-      map: latteArtTexture,
-      roughness: 0.16,
-      clearcoat: 0.95,
-      clearcoatRoughness: 0.06,
-      metalness: 0.02,
-      reflectivity: 0.8,
-    });
-    const coffeeSurface = new THREE.Mesh(coffeeGeom, coffeeMat);
-    coffeeSurface.rotation.x = -Math.PI / 2;
-    coffeeSurface.position.y = 1.42;
-    this.cupGroup.add(coffeeSurface);
-
-    // Ceramic Saucer
-    const saucerPoints = [
-      new THREE.Vector2(0, 0.04),
-      new THREE.Vector2(0.68, 0.04),
-      new THREE.Vector2(0.72, 0.02),
-      new THREE.Vector2(0.78, 0.0),
-      new THREE.Vector2(0.86, 0.0),
-      new THREE.Vector2(0.90, 0.04),
-      new THREE.Vector2(1.25, 0.10),
-      new THREE.Vector2(1.75, 0.22),
-      new THREE.Vector2(2.18, 0.38),
-      new THREE.Vector2(2.20, 0.39),
-      new THREE.Vector2(2.18, 0.36),
-      new THREE.Vector2(1.72, 0.18),
-      new THREE.Vector2(1.20, 0.08),
-      new THREE.Vector2(0.82, 0.04),
-      new THREE.Vector2(0, 0.04),
-    ];
-    const saucerGeom = new THREE.LatheGeometry(saucerPoints, 64);
-    saucerGeom.computeVertexNormals();
-    const saucer = new THREE.Mesh(saucerGeom, porcelainMat);
-    saucer.castShadow = true;
-    saucer.receiveShadow = true;
-    this.cupGroup.add(saucer);
-
-    // Gold Trim on Saucer Rim
-    const saucerGoldGeom = new THREE.TorusGeometry(2.18, 0.015, 16, 64);
-    saucerGoldGeom.rotateX(Math.PI / 2);
-    saucerGoldGeom.translate(0, 0.385, 0);
-    const saucerGold = new THREE.Mesh(saucerGoldGeom, goldRimMat);
-    this.cupGroup.add(saucerGold);
-
-    // Concentric Liquid Pour Impact Ripples
-    for (let r = 0; r < 3; r++) {
-      const ringGeom = new THREE.RingGeometry(0.04, 0.08, 32);
-      const ringMat = new THREE.MeshBasicMaterial({
-        color: 0xe6caa3,
-        transparent: true,
-        opacity: 0.6,
-        side: THREE.DoubleSide,
-      });
-      const ringMesh = new THREE.Mesh(ringGeom, ringMat);
-      ringMesh.rotation.x = -Math.PI / 2;
-      ringMesh.position.set(0, 1.426, 0);
-      ringMesh.userData = { phase: r * 0.33 };
-      this.cupGroup.add(ringMesh);
-      this.rippleRings.push(ringMesh);
-    }
-
-    this.servingGroup.add(this.cupGroup);
-
-    // ── 4. ARTISAN GOOSENECK BARISTA KETTLE (The Pourer) ──
-    this.kettleGroup = new THREE.Group();
-    // Kettle initial position above & to right of cup in pouring stance
-    this.kettleGroup.position.set(1.28, 2.22, 0.12);
-    this.kettleGroup.rotation.z = -0.42; // Tilted in active pour
-
-    // Kettle Main Body (Architectural tapered lathe)
-    const kettlePoints = [
-      new THREE.Vector2(0, 0),
-      new THREE.Vector2(0.68, 0),
-      new THREE.Vector2(0.70, 0.08),
-      new THREE.Vector2(0.66, 0.38),
-      new THREE.Vector2(0.56, 0.85),
-      new THREE.Vector2(0.48, 1.45),
-      new THREE.Vector2(0.44, 1.70),
-      new THREE.Vector2(0.46, 1.74),
-      new THREE.Vector2(0.40, 1.74),
-      new THREE.Vector2(0, 1.74),
-    ];
-    const kettleBodyGeom = new THREE.LatheGeometry(kettlePoints, 48);
-    const kettleBody = new THREE.Mesh(kettleBodyGeom, kettleMat);
-    kettleBody.castShadow = true;
-    kettleBody.receiveShadow = true;
-    this.kettleGroup.add(kettleBody);
-
-    // Kettle Lid with Walnut / Brass Knob
-    const lidGeom = new THREE.CylinderGeometry(0.42, 0.44, 0.06, 32);
-    const lid = new THREE.Mesh(lidGeom, kettleMat);
-    lid.position.y = 1.76;
-    this.kettleGroup.add(lid);
-
-    const knobGeom = new THREE.SphereGeometry(0.08, 16, 16);
-    const knob = new THREE.Mesh(knobGeom, brassMat);
-    knob.position.y = 1.88;
-    this.kettleGroup.add(knob);
-
-    // Gooseneck Spout (Arching from base toward cup)
-    const spoutCurve = new THREE.CatmullRomCurve3([
-      new THREE.Vector3(0.52, 0.32, 0),
-      new THREE.Vector3(0.92, 0.65, 0),
-      new THREE.Vector3(1.10, 1.15, 0),
-      new THREE.Vector3(1.00, 1.55, 0),
-      new THREE.Vector3(0.68, 1.65, 0),
-      new THREE.Vector3(0.32, 1.45, 0), // Spout tip pointing down
-    ]);
-    const spoutGeom = new THREE.TubeGeometry(spoutCurve, 40, 0.045, 16, false);
-    const spoutMesh = new THREE.Mesh(spoutGeom, kettleMat);
-    spoutMesh.castShadow = true;
-    this.kettleGroup.add(spoutMesh);
-
-    // Kettle Ergonomic Handle
-    const kettleHandleCurve = new THREE.CatmullRomCurve3([
-      new THREE.Vector3(-0.48, 1.40, 0),
-      new THREE.Vector3(-0.98, 1.10, 0),
-      new THREE.Vector3(-0.95, 0.50, 0),
-      new THREE.Vector3(-0.60, 0.30, 0),
-    ]);
-    const kettleHandleGeom = new THREE.TubeGeometry(kettleHandleCurve, 32, 0.060, 16, false);
-    const kettleHandle = new THREE.Mesh(kettleHandleGeom, kettleMat);
-    kettleHandle.castShadow = true;
-    this.kettleGroup.add(kettleHandle);
-
-    this.servingGroup.add(this.kettleGroup);
-
-    // ── 5. DYNAMIC LIQUID STREAM (POURING INTO CUP) ──
-    this.streamTexture = createStreamTexture();
-    const streamCurve = new THREE.CatmullRomCurve3([
-      new THREE.Vector3(0.68, 2.70, 0.12), // Connected from spout tip
-      new THREE.Vector3(0.48, 2.25, 0.08),
-      new THREE.Vector3(0.24, 1.82, 0.04),
-      new THREE.Vector3(0.00, 1.42, 0.00), // Into center of cup
-    ]);
-    const streamGeom = new THREE.TubeGeometry(streamCurve, 32, 0.032, 16, false);
-    const streamMat = new THREE.MeshPhysicalMaterial({
-      map: this.streamTexture,
-      color: 0x5c2b0d,
-      roughness: 0.1,
-      clearcoat: 1.0,
-      clearcoatRoughness: 0.05,
-      transparent: true,
-      opacity: 0.95,
-      transmission: 0.25,
-      side: THREE.DoubleSide,
-    });
-    this.pourStream = new THREE.Mesh(streamGeom, streamMat);
-    this.servingGroup.add(this.pourStream);
-
-    this.scene.add(this.servingGroup);
-  }
-
-  // ── 6. ARTISAN TABLETOP COFFEE BEANS (REALISTIC STILL-LIFE) ──
-  createArtisanTabletopBeans() {
-    const beanGeom = createAuthenticBeanGeometry();
-    const beanMat = new THREE.MeshStandardMaterial({
-      color: 0x2e180d,        // Dark roast Arabica sheen
-      roughness: 0.35,
-      metalness: 0.05,
-    });
-
-    // 16 beans naturally resting on the walnut tray around the saucer
-    const trayBeanCount = 16;
-    for (let i = 0; i < trayBeanCount; i++) {
-      const bean = new THREE.Mesh(beanGeom, beanMat);
-      bean.castShadow = true;
-      bean.receiveShadow = true;
-
-      const angle = (i / trayBeanCount) * Math.PI * 2 + (Math.random() - 0.5) * 0.3;
-      const radius = 1.42 + Math.random() * 0.95;
-      const s = 0.65 + Math.random() * 0.25;
-
-      bean.scale.set(s, s, s);
-      bean.position.set(Math.cos(angle) * radius, 0.035, Math.sin(angle) * radius);
-      bean.rotation.set(
-        Math.PI / 2 + (Math.random() - 0.5) * 0.25,
-        Math.random() * Math.PI * 2,
-        (Math.random() - 0.5) * 0.4
-      );
-      this.servingGroup.add(bean);
-    }
-
-    // 8 beans casually scattered around the perimeter of the walnut tray
-    const rimBeanCount = 8;
-    for (let i = 0; i < rimBeanCount; i++) {
-      const bean = new THREE.Mesh(beanGeom, beanMat);
-      bean.castShadow = true;
-      bean.receiveShadow = true;
-
-      const angle = (i / rimBeanCount) * Math.PI * 2 + (Math.random() - 0.5) * 0.4;
-      const radius = 2.58 + Math.random() * 0.28;
-      const s = 0.60 + Math.random() * 0.25;
-
-      bean.scale.set(s, s, s);
-      bean.position.set(Math.cos(angle) * radius, -0.04, Math.sin(angle) * radius);
-      bean.rotation.set(
-        Math.PI / 2 + (Math.random() - 0.5) * 0.2,
-        Math.random() * Math.PI * 2,
-        (Math.random() - 0.5) * 0.3
-      );
-      this.servingGroup.add(bean);
-    }
-  }
-
-  createSteamParticleSystem() {
-    const count = 120;
-    const geom = new THREE.BufferGeometry();
-    const positions = new Float32Array(count * 3);
-    const sizes = new Float32Array(count);
-    const alphas = new Float32Array(count);
-    const velocities = new Float32Array(count);
-
-    for (let i = 0; i < count; i++) {
-      this.resetSteamParticle(i, positions, sizes, alphas, velocities, true);
-    }
-
-    geom.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    geom.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
-    geom.setAttribute('alpha', new THREE.BufferAttribute(alphas, 1));
-
-    const steamTexture = createSteamTexture();
-    const steamMat = new THREE.PointsMaterial({
-      size: 0.28,
-      map: steamTexture,
-      transparent: true,
-      opacity: 0.30,
-      depthWrite: false,
-      blending: THREE.NormalBlending,
-      color: 0xffffff,
-      sizeAttenuation: true,
-    });
-
-    this.steamParticles = new THREE.Points(geom, steamMat);
-    this.cupGroup.add(this.steamParticles);
-
-    this.steamData = { positions, sizes, alphas, velocities, count };
-  }
-
-  resetSteamParticle(i, positions, sizes, alphas, velocities, initial = false) {
-    const angle = Math.random() * Math.PI * 2;
-    const r = Math.random() * 0.26;
-
-    positions[i * 3] = Math.cos(angle) * r;
-    positions[i * 3 + 1] = initial ? 1.42 + Math.random() * 0.75 : 1.42;
-    positions[i * 3 + 2] = Math.sin(angle) * r;
-
-    sizes[i] = 0.12 + Math.random() * 0.16;
-    alphas[i] = 0.15 + Math.random() * 0.18;
-    velocities[i] = 0.30 + Math.random() * 0.40;
-  }
-
-  setupEventListeners() {
-    window.addEventListener('resize', this.onResize.bind(this));
-    window.addEventListener('mousemove', this.onMouseMove.bind(this), { passive: true });
-    window.addEventListener('touchmove', this.onTouchMove.bind(this), { passive: true });
-    window.addEventListener('scroll', this.onScroll.bind(this), { passive: true });
-    document.addEventListener('visibilitychange', () => {
-      this.isPageVisible = !document.hidden;
-    });
-  }
-
-  onTouchMove(e) {
-    if (e.touches && e.touches.length > 0) {
-      const touch = e.touches[0];
-      this.targetMouseX = (touch.clientX / window.innerWidth) * 2 - 1;
-      this.targetMouseY = -(touch.clientY / window.innerHeight) * 2 + 1;
-    }
-  }
-
-  onResize() {
-    this.camera.aspect = window.innerWidth / window.innerHeight;
-    this.camera.updateProjectionMatrix();
-    this.renderer.setSize(window.innerWidth, window.innerHeight);
-    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-    const isMobile = window.innerWidth < 768;
-    if (this.servingGroup) {
-      const s = isMobile ? 0.23 : 0.40;
-      this.servingGroup.scale.set(s, s, s);
-    }
-  }
-
-  onMouseMove(e) {
-    this.targetMouseX = (e.clientX / window.innerWidth) * 2 - 1;
-    this.targetMouseY = -(e.clientY / window.innerHeight) * 2 + 1;
-  }
-
-  onScroll() {
-    const maxScroll = document.body.scrollHeight - window.innerHeight;
-    this.targetScrollProgress = maxScroll > 0 ? window.scrollY / maxScroll : 0;
-    this.scrollVelocity = (window.scrollY - this.lastScrollY) * 0.0015;
-    this.lastScrollY = window.scrollY;
-  }
-
-  updateCoffeeBeans(_deltaTime) {
-    // All 24 beans are grounded still-life elements on the walnut serving tray
-  }
-
-  updateSteamParticles(deltaTime) {
-    if (!this.steamParticles || !this.steamData) return;
-
-    const { positions, sizes, alphas, velocities, count } = this.steamData;
-
-    for (let i = 0; i < count; i++) {
-      positions[i * 3 + 1] += velocities[i] * deltaTime;
-      positions[i * 3] += Math.sin(positions[i * 3 + 1] * 4.0 + i) * 0.0025;
-      positions[i * 3 + 2] += Math.cos(positions[i * 3 + 1] * 4.0 + i) * 0.0025;
-
-      alphas[i] -= deltaTime * 0.20;
-      sizes[i] += deltaTime * 0.09;
-
-      if (positions[i * 3 + 1] > 2.25 || alphas[i] <= 0.02) {
-        this.resetSteamParticle(i, positions, sizes, alphas, velocities);
-      }
-    }
-
-    this.steamParticles.geometry.attributes.position.needsUpdate = true;
-  }
-
-  // ── Dynamic Pour Animation & 6-Stage Choreography ──
-  updateChoreography(deltaTime) {
-    this.mouseX += (this.targetMouseX - this.mouseX) * 0.06;
-    this.mouseY += (this.targetMouseY - this.mouseY) * 0.06;
-
-    this.scrollProgress += (this.targetScrollProgress - this.scrollProgress) * 0.08;
-    const p = Math.max(0, Math.min(1, this.scrollProgress));
-
-    const isMobile = window.innerWidth < 768;
-
-    // 1. Animate Liquid Flow Texture in Stream
-    if (this.streamTexture) {
-      this.streamTexture.offset.y -= deltaTime * 4.2;
-    }
-
-    // 2. Animate Pour Impact Ripples on Coffee Surface
-    if (this.rippleRings.length > 0) {
-      this.rippleRings.forEach(ring => {
-        ring.userData.phase = (ring.userData.phase + deltaTime * 1.6) % 1.0;
-        const progress = ring.userData.phase;
-        const scale = 0.2 + progress * 2.2;
-        ring.scale.set(scale, scale, 1);
-        ring.material.opacity = Math.max(0, (1 - progress) * 0.65);
-      });
-    }
-
-    // 3. Dynamic Pouring vs Served Transition:
-    // When p is near top (Hero: 0 to 0.18), the kettle is actively pouring!
-    // As p goes from 0.18 to 0.35, the kettle straightens, stream disappears, kettle lifts away.
-    if (this.kettleGroup && this.pourStream) {
-      if (p < 0.18) {
-        // Active pour
-        const tilt = -0.42 + Math.sin(this.clock.getElapsedTime() * 2.0) * 0.02;
-        this.kettleGroup.rotation.z = tilt;
-        this.kettleGroup.position.y = 2.22;
-        this.kettleGroup.visible = true;
-        this.pourStream.visible = true;
-        this.pourStream.material.opacity = 0.95;
-      } else if (p < 0.35) {
-        // Transition: kettle tilts back and lifts away
-        const t = (p - 0.18) / 0.17;
-        this.kettleGroup.rotation.z = THREE.MathUtils.lerp(-0.42, 0.0, t);
-        this.kettleGroup.position.y = THREE.MathUtils.lerp(2.22, 4.2, t);
-        this.pourStream.material.opacity = THREE.MathUtils.lerp(0.95, 0.0, t);
-        this.pourStream.visible = t < 0.85;
-        this.kettleGroup.visible = true;
-      } else {
-        // Pour finished: Coffee is served!
-        this.kettleGroup.visible = false;
-        this.pourStream.visible = false;
-      }
-    }
-
-    // 4. Choreographed Multi-Stage Camera & Ensemble Movement
-    let camTargetPos = new THREE.Vector3();
-    let camLookTarget = new THREE.Vector3();
-    let groupTargetPos = new THREE.Vector3();
-    let groupTargetRot = new THREE.Vector3();
-
-    const heroX = isMobile ? 0 : 1.35;
-    const heroY = isMobile ? -1.15 : 0.08;
-
-    if (p < 0.18) {
-      // Stage 1: Hero (Active Pour, elegant right side on desktop)
-      const t = p / 0.18;
-      camTargetPos.lerpVectors(new THREE.Vector3(0, 2.0, 5.2), new THREE.Vector3(-1.6, 2.0, 4.6), t);
-      camLookTarget.lerpVectors(new THREE.Vector3(0.45, 1.0, 0), new THREE.Vector3(0.25, 0.9, 0), t);
-      groupTargetPos.lerpVectors(new THREE.Vector3(heroX, heroY, 0), new THREE.Vector3(0.85, 0.08, 0), t);
-      groupTargetRot.lerpVectors(new THREE.Vector3(0.08, 0.22, -0.02), new THREE.Vector3(0.06, 1.25, 0.0), t);
-    } else if (p < 0.38) {
-      // Stage 2: About (Served cup on walnut board & spoon side profile)
-      const t = (p - 0.18) / 0.20;
-      camTargetPos.lerpVectors(new THREE.Vector3(-1.6, 2.0, 4.6), new THREE.Vector3(0.0, 3.8, 2.6), t);
-      camLookTarget.lerpVectors(new THREE.Vector3(0.25, 0.9, 0), new THREE.Vector3(0.0, 0.8, 0), t);
-      groupTargetPos.lerpVectors(new THREE.Vector3(0.85, 0.08, 0), new THREE.Vector3(0.0, 0.05, 0), t);
-      groupTargetRot.lerpVectors(new THREE.Vector3(0.06, 1.25, 0.0), new THREE.Vector3(-0.16, 2.85, 0.0), t);
-    } else if (p < 0.58) {
-      // Stage 3: Menu (Overhead beauty shot looking down at the Rosetta latte art!)
-      const t = (p - 0.38) / 0.20;
-      camTargetPos.lerpVectors(new THREE.Vector3(0.0, 3.8, 2.6), new THREE.Vector3(2.0, 1.6, 4.0), t);
-      camLookTarget.lerpVectors(new THREE.Vector3(0.0, 0.8, 0), new THREE.Vector3(-0.2, 0.8, 0), t);
-      groupTargetPos.lerpVectors(new THREE.Vector3(0.0, 0.05, 0), new THREE.Vector3(-0.75, 0.08, 0), t);
-      groupTargetRot.lerpVectors(new THREE.Vector3(-0.16, 2.85, 0.0), new THREE.Vector3(0.12, 4.20, 0.05), t);
-    } else if (p < 0.76) {
-      // Stage 4: Reservation (Intimate Table Setting)
-      const t = (p - 0.58) / 0.18;
-      camTargetPos.lerpVectors(new THREE.Vector3(2.0, 1.6, 4.0), new THREE.Vector3(1.5, 1.35, 4.4), t);
-      camLookTarget.lerpVectors(new THREE.Vector3(-0.2, 0.8, 0), new THREE.Vector3(0.2, 0.75, 0), t);
-      groupTargetPos.lerpVectors(new THREE.Vector3(-0.75, 0.08, 0), new THREE.Vector3(0.65, 0.05, 0), t);
-      groupTargetRot.lerpVectors(new THREE.Vector3(0.12, 4.20, 0.05), new THREE.Vector3(0.15, 5.2, 0.0), t);
-    } else if (p < 0.90) {
-      // Stage 5: Reviews (Macro Beauty Angle)
-      const t = (p - 0.76) / 0.14;
-      camTargetPos.lerpVectors(new THREE.Vector3(1.5, 1.35, 4.4), new THREE.Vector3(-1.5, 1.6, 4.4), t);
-      camLookTarget.lerpVectors(new THREE.Vector3(0.2, 0.75, 0), new THREE.Vector3(0.0, 0.8, 0), t);
-      groupTargetPos.lerpVectors(new THREE.Vector3(0.65, 0.05, 0), new THREE.Vector3(-0.45, 0.08, 0), t);
-      groupTargetRot.lerpVectors(new THREE.Vector3(0.15, 5.2, 0.0), new THREE.Vector3(0.08, 5.8, 0.0), t);
+    this.updateIcons();
+  },
+
+  toggle(id, btn) {
+    if (this.saved.has(id)) {
+      this.saved.delete(id);
+      btn.classList.remove('wishlist-btn--active');
+      showToast('Removed from favorites', '♡');
     } else {
-      // Stage 6: Visit (Centered Peaceful Served Presentation)
-      const t = (p - 0.90) / 0.10;
-      camTargetPos.lerpVectors(new THREE.Vector3(-1.5, 1.6, 4.4), new THREE.Vector3(0, 1.7, 4.8), t);
-      camLookTarget.lerpVectors(new THREE.Vector3(0.0, 0.8, 0), new THREE.Vector3(0, 0.8, 0), t);
-      groupTargetPos.lerpVectors(new THREE.Vector3(-0.45, 0.08, 0), new THREE.Vector3(0, 0.05, 0), t);
-      groupTargetRot.lerpVectors(new THREE.Vector3(0.08, 5.8, 0.0), new THREE.Vector3(0.06, 6.28, 0.0), t);
+      this.saved.add(id);
+      btn.classList.add('wishlist-btn--active');
+      showToast('Saved to your favorites!', '❤️');
     }
-
-    this.camera.position.lerp(camTargetPos, 0.1);
-    this.camera.lookAt(camLookTarget);
-
-    if (this.servingGroup) {
-      const levitate = Math.sin(this.clock.getElapsedTime() * 1.2) * 0.025;
-      this.servingGroup.position.x = groupTargetPos.x + this.mouseX * 0.20;
-      this.servingGroup.position.y = groupTargetPos.y + levitate + this.mouseY * 0.12;
-      this.servingGroup.position.z = groupTargetPos.z;
-
-      this.servingGroup.rotation.x = groupTargetRot.x + this.mouseY * 0.15;
-      this.servingGroup.rotation.y = groupTargetRot.y + this.mouseX * 0.25;
-      this.servingGroup.rotation.z = groupTargetRot.z;
+    try {
+      localStorage.setItem('coffea_wishlist', JSON.stringify([...this.saved]));
+    } catch (_e) {
+      // storage unavailable
     }
-  }
+  },
 
-  animate() {
-    requestAnimationFrame(this.animate.bind(this));
-    if (!this.isPageVisible) return;
-
-    const deltaTime = Math.min(this.clock.getDelta(), 1 / 30);
-
-    this.updateCoffeeBeans(deltaTime);
-    this.updateSteamParticles(deltaTime);
-    this.updateChoreography(deltaTime);
-
-    this.renderer.render(this.scene, this.camera);
-  }
-}
-
-// ─── TOP-LEVEL DYNAMIC SCROLL CONTROLLER ─────────────────────────────────────
-
-function initScrollBaseController() {
-  const progressBar = document.getElementById('scroll-progress-bar');
-  const progressReadout = document.getElementById('nav-progress-readout');
-  const sectionNumEl = document.getElementById('nav-section-num');
-  const chipsContainer = document.getElementById('nav-chips');
-  const ctaBtn = document.getElementById('nav-cta-action');
-  const navEl = document.getElementById('main-nav');
-  const timeTicker = document.getElementById('live-time-ticker');
-
-  const sections = ['hero', 'about', 'menu', 'reservation', 'reviews', 'contact'];
-  let currentActiveSection = '';
-
-  function updateSeattleTime() {
-    const now = new Date();
-    const options = { timeZone: 'America/Los_Angeles', hour: '2-digit', minute: '2-digit', hour12: true };
-    const timeStr = now.toLocaleTimeString('en-US', options);
-    if (timeTicker) {
-      timeTicker.textContent = `SEATTLE ${timeStr} · OPEN TODAY`;
-    }
-  }
-  updateSeattleTime();
-  setInterval(updateSeattleTime, 30000);
-
-  function updateSectionTelemetry(sectionKey) {
-    if (currentActiveSection === sectionKey) return;
-    currentActiveSection = sectionKey;
-
-    const data = SECTION_TELEMETRY[sectionKey] || SECTION_TELEMETRY.hero;
-
-    if (sectionNumEl) {
-      sectionNumEl.textContent = data.num;
-    }
-
-    if (chipsContainer) {
-      chipsContainer.innerHTML = data.chips.map(chip =>
-        `<span class="nav__chip">${chip}</span>`
-      ).join('');
-    }
-
-    if (ctaBtn) {
-      ctaBtn.textContent = data.cta;
-      ctaBtn.onclick = () => {
-        const target = document.querySelector(data.link);
-        if (target) target.scrollIntoView({ behavior: 'smooth' });
-      };
-    }
-
-    document.querySelectorAll('.nav__link').forEach(link => {
-      const isCurrent = link.dataset.section === sectionKey;
-      link.classList.toggle('nav__link--active', isCurrent);
+  updateIcons() {
+    document.querySelectorAll('.wishlist-btn').forEach((btn) => {
+      const id = btn.dataset.id;
+      if (this.saved.has(id)) {
+        btn.classList.add('wishlist-btn--active');
+      } else {
+        btn.classList.remove('wishlist-btn--active');
+      }
     });
   }
+};
 
-  function onScroll() {
-    const scrollY = window.scrollY;
-    const maxScroll = document.body.scrollHeight - window.innerHeight;
-    const progress = maxScroll > 0 ? (scrollY / maxScroll) * 100 : 0;
+// ─── CAROUSEL SCROLL NAVIGATION ─────────────────────────────────────────────
+function setupCarousels() {
+  document.querySelectorAll('.carousel-arrow').forEach((arrow) => {
+    arrow.addEventListener('click', () => {
+      const trackId = arrow.dataset.track;
+      const track = document.getElementById(trackId);
+      if (!track) return;
 
-    if (progressBar) {
-      progressBar.style.width = `${progress}%`;
-    }
+      const firstCard = track.querySelector('.product-card');
+      const cardWidth = firstCard ? firstCard.offsetWidth + 20 : 300;
+      const isNext = arrow.classList.contains('next');
 
-    if (progressReadout) {
-      progressReadout.textContent = `${Math.round(progress).toString().padStart(2, '0')}%`;
-    }
-
-    if (navEl) {
-      navEl.classList.toggle('nav--scrolled', scrollY > 60);
-    }
-
-    const viewCenter = scrollY + window.innerHeight * 0.38;
-    for (let i = sections.length - 1; i >= 0; i--) {
-      const el = document.getElementById(sections[i]);
-      if (el) {
-        const top = el.offsetTop;
-        if (viewCenter >= top) {
-          updateSectionTelemetry(sections[i]);
-          break;
-        }
-      }
-    }
-  }
-
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
-}
-
-// ─── HERO INTRO ANIMATIONS ───────────────────────────────────────────────────
-
-function initHeroAnimations() {
-  // Hero typography & badges orchestrated via CSS keyframes with backwards fill
-}
-
-// ─── SCROLL REVEAL ────────────────────────────────────────────────────────────
-
-function initScrollReveal() {
-  const revealEls = document.querySelectorAll('.reveal');
-  revealEls.forEach(el => {
-    gsap.fromTo(el,
-      { y: 35, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.85,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: el,
-          start: 'top 88%',
-          toggleActions: 'play none none none'
-        }
-      }
-    );
+      track.scrollBy({
+        left: isNext ? cardWidth : -cardWidth,
+        behavior: 'smooth'
+      });
+    });
   });
 }
 
-// ─── STATS COUNTER ────────────────────────────────────────────────────────────
+// ─── CATEGORY STRIP FILTERING ───────────────────────────────────────────────
+function setupCategories() {
+  const cards = document.querySelectorAll('.category-card');
+  cards.forEach((card) => {
+    card.addEventListener('click', () => {
+      cards.forEach((c) => c.classList.remove('category-card--active'));
+      card.classList.add('category-card--active');
 
-function initStatsCounter() {
-  document.querySelectorAll('.stat-pill__num[data-count]').forEach(el => {
-    const target = parseInt(el.dataset.count, 10);
-    ScrollTrigger.create({
-      trigger: el,
-      start: 'top 82%',
-      once: true,
-      onEnter: () => {
-        gsap.to({ val: 0 }, {
-          val: target,
-          duration: 2.2,
-          ease: 'power2.out',
-          onUpdate: function() {
-            el.textContent = Math.round(this.targets()[0].val);
+      const category = card.dataset.category;
+
+      if (category === 'dessert') {
+        const dessertSec = document.getElementById('special-dessert');
+        if (dessertSec) {
+          dessertSec.scrollIntoView({ behavior: 'smooth' });
+        }
+      } else {
+        const coffeeSec = document.getElementById('special-coffee');
+        if (coffeeSec) {
+          coffeeSec.scrollIntoView({ behavior: 'smooth' });
+        }
+        // Filter or highlight matching items in track
+        const track = document.getElementById('coffee-track');
+        if (track) {
+          const items = track.querySelectorAll('.product-card');
+          items.forEach((item) => {
+            if (category === 'all' || item.dataset.category === category) {
+              item.style.opacity = '1';
+              item.style.transform = 'scale(1)';
+            } else {
+              item.style.opacity = '0.45';
+              item.style.transform = 'scale(0.97)';
+            }
+          });
+        }
+      }
+    });
+  });
+}
+
+// ─── LIVE SEARCH MODAL ──────────────────────────────────────────────────────
+function setupSearchModal() {
+  const searchModal = document.getElementById('search-modal');
+  const openBtn = document.getElementById('open-search-btn');
+  const closeBtn = document.getElementById('close-search-btn');
+  const searchInput = document.getElementById('live-search-input');
+  const resultsList = document.getElementById('search-results-list');
+
+  if (!searchModal) return;
+
+  const openSearch = () => {
+    searchModal.showModal();
+    if (searchInput) {
+      searchInput.value = '';
+      searchInput.focus();
+    }
+    renderSearchResults('');
+  };
+
+  const closeSearch = () => {
+    searchModal.close();
+  };
+
+  if (openBtn) openBtn.addEventListener('click', openSearch);
+  if (closeBtn) closeBtn.addEventListener('click', closeSearch);
+
+  searchModal.addEventListener('click', (e) => {
+    if (e.target === searchModal) closeSearch();
+  });
+
+  const renderSearchResults = (query) => {
+    if (!resultsList) return;
+    const cleanQuery = query.trim().toLowerCase();
+
+    if (!cleanQuery) {
+      resultsList.innerHTML = '<p class="search-hint">Type above to quickly find your favorite roast or bakery item.</p>';
+      return;
+    }
+
+    const matches = CATALOG.filter((item) =>
+      item.name.toLowerCase().includes(cleanQuery) ||
+      item.desc.toLowerCase().includes(cleanQuery) ||
+      item.category.toLowerCase().includes(cleanQuery)
+    );
+
+    if (matches.length === 0) {
+      resultsList.innerHTML = `<p class="search-hint">No matches found for "${query}". Try searching "latte" or "croissant".</p>`;
+      return;
+    }
+
+    resultsList.innerHTML = matches.map((item) => `
+      <div class="search-result-row" data-id="${item.id}">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <img src="${item.img}" alt="${item.name}" style="width: 44px; height: 44px; border-radius: 8px; object-fit: cover;">
+          <div>
+            <div style="font-weight: 600; font-size: 0.9rem; color: #18130e;">${item.name}</div>
+            <div style="font-size: 0.75rem; color: #746a62;">${item.priceDisplay}</div>
+          </div>
+        </div>
+        <button class="btn btn-order btn-search-add" data-id="${item.id}" type="button">Add</button>
+      </div>
+    `).join('');
+
+    resultsList.querySelectorAll('.btn-search-add').forEach((addBtn) => {
+      addBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const id = addBtn.dataset.id;
+        cart.addItem(id);
+        closeSearch();
+      });
+    });
+  };
+
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      renderSearchResults(e.target.value);
+    });
+  }
+}
+
+// ─── LOGIN MODAL ────────────────────────────────────────────────────────────
+function setupLoginModal() {
+  const modal = document.getElementById('login-modal');
+  const openBtn = document.getElementById('open-login-btn');
+  const closeBtn = document.getElementById('close-login-btn');
+  const form = document.getElementById('login-form');
+
+  if (!modal) return;
+
+  const open = () => modal.showModal();
+  const close = () => modal.close();
+
+  if (openBtn) openBtn.addEventListener('click', open);
+  if (closeBtn) closeBtn.addEventListener('click', close);
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) close();
+  });
+
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = document.getElementById('login-email').value;
+      const name = email.split('@')[0];
+      close();
+      showToast(`Welcome back, ${name}!`, '☕');
+      if (openBtn) openBtn.textContent = name.toUpperCase();
+    });
+  }
+}
+
+// ─── NEWSLETTER SUBSCRIPTION ────────────────────────────────────────────────
+function setupNewsletter() {
+  const form = document.getElementById('newsletter-form');
+  const input = document.getElementById('newsletter-email');
+  const feedback = document.getElementById('newsletter-feedback');
+
+  if (!form || !input || !feedback) return;
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const email = input.value.trim();
+
+    if (!email || !email.includes('@')) {
+      feedback.textContent = 'Please enter a valid email address.';
+      feedback.className = 'newsletter-feedback error';
+      return;
+    }
+
+    feedback.textContent = '🎉 You are in! Use promo code COFFEA15 for 15% off your next order.';
+    feedback.className = 'newsletter-feedback success';
+    input.value = '';
+    showToast('Promo code COFFEA15 unlocked!', '🎁');
+  });
+}
+
+// ─── ORDER DRAWER CONTROLS ──────────────────────────────────────────────────
+function setupCartDrawer() {
+  const drawer = document.getElementById('cart-drawer');
+  const openBtn = document.getElementById('open-cart-btn');
+  const closeBtn = document.getElementById('close-cart-btn');
+  const overlay = document.getElementById('cart-overlay');
+  const checkoutBtn = document.getElementById('checkout-btn');
+  const list = document.getElementById('cart-items-list');
+
+  const openDrawer = () => {
+    if (drawer) drawer.setAttribute('aria-hidden', 'false');
+  };
+
+  const closeDrawer = () => {
+    if (drawer) drawer.setAttribute('aria-hidden', 'true');
+  };
+
+  if (openBtn) openBtn.addEventListener('click', openDrawer);
+  if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+  if (overlay) overlay.addEventListener('click', closeDrawer);
+
+  if (checkoutBtn) {
+    checkoutBtn.addEventListener('click', () => {
+      if (cart.items.length === 0) {
+        showToast('Your order is empty!', '⚠️');
+        return;
+      }
+      showToast('Thank you! Your order is being prepared.', '☕');
+      cart.clear();
+      closeDrawer();
+    });
+  }
+
+  // Handle quantity changes inside drawer
+  if (list) {
+    list.addEventListener('click', (e) => {
+      const btn = e.target.closest('.cart-qty-btn');
+      if (!btn) return;
+      const action = btn.dataset.action;
+      const id = btn.dataset.id;
+      if (action === 'increase') cart.updateQty(id, 1);
+      if (action === 'decrease') cart.updateQty(id, -1);
+    });
+  }
+
+  // Handle all "Order Now" buttons on page
+  document.addEventListener('click', (e) => {
+    const orderBtn = e.target.closest('.btn-order');
+    if (!orderBtn || orderBtn.classList.contains('btn-search-add')) return;
+    const id = orderBtn.dataset.id;
+    if (id) {
+      cart.addItem(id);
+    }
+  });
+}
+
+// ─── WISHLIST EVENTS ────────────────────────────────────────────────────────
+function setupWishlistEvents() {
+  document.addEventListener('click', (e) => {
+    const wishBtn = e.target.closest('.wishlist-btn');
+    if (!wishBtn) return;
+    const id = wishBtn.dataset.id;
+    wishlist.toggle(id, wishBtn);
+  });
+}
+
+// ─── BEANS BANNER CTA ───────────────────────────────────────────────────────
+function setupBeansBanner() {
+  const exploreBtn = document.getElementById('explore-beans-btn');
+  if (!exploreBtn) return;
+  exploreBtn.addEventListener('click', () => {
+    cart.addItem('b-1');
+    const drawer = document.getElementById('cart-drawer');
+    if (drawer) drawer.setAttribute('aria-hidden', 'false');
+  });
+}
+
+// ─── HEADER SCROLL SHADOW & MOBILE MENU ─────────────────────────────────────
+function setupHeader() {
+  const header = document.getElementById('site-header');
+  const toggle = document.getElementById('mobile-menu-toggle');
+  const nav = document.getElementById('main-nav');
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 20) {
+      header?.classList.add('header--scrolled');
+    } else {
+      header?.classList.remove('header--scrolled');
+    }
+  }, { passive: true });
+
+  if (toggle && nav) {
+    toggle.addEventListener('click', () => {
+      const isOpen = nav.classList.toggle('nav-links--open');
+      toggle.classList.toggle('mobile-toggle--open', isOpen);
+      toggle.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    nav.querySelectorAll('.nav-item').forEach((link) => {
+      link.addEventListener('click', () => {
+        nav.classList.remove('nav-links--open');
+        toggle.classList.remove('mobile-toggle--open');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+}
+
+// ─── SECTION ACTIVE OBSERVER ────────────────────────────────────────────────
+function setupScrollSpy() {
+  const sections = document.querySelectorAll('section[id]');
+  const navItems = document.querySelectorAll('.nav-links .nav-item[href]');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id');
+        navItems.forEach((link) => {
+          if (link.getAttribute('href') === `#${id}`) {
+            link.classList.add('nav-item--active');
+          } else {
+            link.classList.remove('nav-item--active');
           }
         });
       }
     });
-  });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+
+  sections.forEach((sec) => observer.observe(sec));
 }
 
-// ─── DYNAMIC MENU GRID WITH FILTERING ────────────────────────────────────────
-
-function initMenu() {
-  const grid = document.getElementById('menu-grid');
-  const categoriesContainer = document.getElementById('menu-categories');
-  if (!grid || !categoriesContainer) return;
-
-  const categories = ['All', 'Hot Coffee', 'Espresso Bar', 'Cold Brews', 'Artisan Bakery'];
-  let activeCategory = 'All';
-
-  function renderTabs() {
-    categoriesContainer.innerHTML = categories.map(cat =>
-      `<button class="menu__category${cat === activeCategory ? ' menu__category--active' : ''}"
-        type="button" data-cat="${cat}">${cat}</button>`
-    ).join('');
-
-    categoriesContainer.querySelectorAll('.menu__category').forEach(btn => {
-      btn.addEventListener('click', () => {
-        activeCategory = btn.dataset.cat;
-        renderTabs();
-        renderCards();
-      });
-    });
-  }
-
-  function renderCards() {
-    const items = activeCategory === 'All'
-      ? MENU_ITEMS
-      : MENU_ITEMS.filter(item => item.category === activeCategory);
-
-    grid.innerHTML = items.map(item => `
-      <article class="menu-card" role="listitem">
-        <div class="menu-card__top">
-          <div class="menu-card__icon-badge" aria-hidden="true">${item.icon}</div>
-          <span class="menu-card__price">${item.price}</span>
-        </div>
-        <div>
-          <h3 class="menu-card__title">${item.name}</h3>
-          <p class="menu-card__desc">${item.desc}</p>
-        </div>
-        <div class="menu-card__bottom">
-          <div class="menu-card__tags">
-            ${item.tags.map(t => `<span class="menu-card__tag">#${t}</span>`).join('')}
-          </div>
-          <span class="menu-card__meta-origin">${item.origin}</span>
-        </div>
-      </article>
-    `).join('');
-
-    gsap.fromTo('.menu-card',
-      { y: 24, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.45, stagger: 0.05, ease: 'power2.out' }
-    );
-  }
-
-  renderTabs();
-  renderCards();
-}
-
-// ─── RESERVATION & CONTACT HANDLERS ──────────────────────────────────────────
-
-function initForms() {
-  const resForm = document.getElementById('reservation-form');
-  const resNote = document.getElementById('res-note');
-  const contactForm = document.getElementById('contact-form');
-  const contactNote = document.getElementById('contact-note');
-  const copyBtn = document.getElementById('copy-address-btn');
-
-  const dateInput = document.getElementById('res-date');
-  if (dateInput) {
-    const tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    dateInput.value = tomorrow.toISOString().split('T')[0];
-  }
-
-  if (copyBtn) {
-    copyBtn.addEventListener('click', () => {
-      navigator.clipboard.writeText('123 Coffee Lane, Brew District, Seattle, WA 98101').then(() => {
-        const orig = copyBtn.textContent;
-        copyBtn.textContent = '✓ Copied Coordinates!';
-        setTimeout(() => { copyBtn.textContent = orig; }, 2200);
-      });
-    });
-  }
-
-  if (resForm) {
-    resForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const submitBtn = resForm.querySelector('.form__submit');
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = '<span>Reserving Your Table…</span>';
-
-      setTimeout(() => {
-        resNote.textContent = '✓ Table reserved! A confirmation has been sent to your email.';
-        resNote.style.color = 'var(--color-success)';
-        submitBtn.innerHTML = '<span>Table Confirmed</span>';
-        resForm.reset();
-        setTimeout(() => {
-          submitBtn.disabled = false;
-          submitBtn.innerHTML = '<span>Confirm Table Reservation</span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
-        }, 3200);
-      }, 1100);
-    });
-  }
-
-  if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const submitBtn = contactForm.querySelector('.form__submit');
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = '<span>Transmitting…</span>';
-
-      setTimeout(() => {
-        contactNote.textContent = '✓ Message received! Our concierge will reply within 2 hours.';
-        contactNote.style.color = 'var(--color-success)';
-        submitBtn.innerHTML = '<span>Message Sent</span>';
-        contactForm.reset();
-        setTimeout(() => {
-          submitBtn.disabled = false;
-          submitBtn.innerHTML = '<span>Send Message</span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
-        }, 3200);
-      }, 1000);
-    });
-  }
-}
-
-// ─── MOBILE NAV MENU ─────────────────────────────────────────────────────────
-
-function initMobileNav() {
-  const toggle = document.getElementById('nav-toggle');
-  const menu = document.getElementById('nav-menu');
-
-  if (!toggle || !menu) return;
-
-  toggle.addEventListener('click', () => {
-    const isOpen = menu.classList.toggle('nav__links--open');
-    toggle.classList.toggle('nav__toggle--open', isOpen);
-    toggle.setAttribute('aria-expanded', String(isOpen));
-  });
-
-  menu.querySelectorAll('.nav__link').forEach(link => {
-    link.addEventListener('click', () => {
-      menu.classList.remove('nav__links--open');
-      toggle.classList.remove('nav__toggle--open');
-      toggle.setAttribute('aria-expanded', 'false');
-    });
-  });
-}
-
-// ─── BOOTSTRAP ───────────────────────────────────────────────────────────────
-
+// ─── INITIALIZE APPLICATION ─────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-  window.cafeApp = new CafeApp();
-
-  initScrollBaseController();
-  initHeroAnimations();
-  initScrollReveal();
-  initStatsCounter();
-  initMenu();
-  initForms();
-  initMobileNav();
+  cart.init();
+  wishlist.init();
+  setupCarousels();
+  setupCategories();
+  setupSearchModal();
+  setupLoginModal();
+  setupNewsletter();
+  setupCartDrawer();
+  setupWishlistEvents();
+  setupBeansBanner();
+  setupHeader();
+  setupScrollSpy();
 });

@@ -1,102 +1,106 @@
 :root {
-  /* ─── COFFEA BRAND PALETTE (Minimalist White & Roasted Caramel) ─── */
-  --color-bg: #fbfaf8;
-  --color-bg-alt: #f5f2eb;
-  --color-bg-elevated: #ffffff;
+  /* ─── COFFEA FIGMA BRAND PALETTE ─── */
+  --color-hero-bg: #130f0c;
+  --color-hero-bg-deep: #0c0907;
+  --color-footer-bg: #1a1411;
+  --color-footer-subtle: #241c18;
+
+  /* Surfaces */
+  --color-bg-page: #faf7f2;
+  --color-bg-cream: #f4eee5;
   --color-bg-card: #ffffff;
-  --color-bg-tint: #f3efe6;
-  --color-bg-hover: #ede7dc;
+  --color-bg-elevated: #ffffff;
+  --color-category-bar: #e6d7c3;
+  --color-category-card: #eedfcb;
+  --color-category-active: #dbcbb5;
+  --color-promo-bg: #e1d1be;
+  --color-newsletter-bg: #e3d3c1;
 
-  /* Deep Espresso & Charcoal Typography */
-  --color-fg: #1c1815;
-  --color-fg-heading: #14100c;
-  --color-fg-muted: #5e574f;
-  --color-fg-subtle: #8c8378;
-  --color-fg-faint: #b8b0a4;
+  /* Typography Colors */
+  --color-text-dark: #221c17;
+  --color-text-heading: #18130e;
+  --color-text-muted: #746a62;
+  --color-text-subtle: #9c9187;
+  --color-text-light: #fdfbf7;
+  --color-text-hero-sub: #d3c7bb;
 
-  /* Coffea Signature Warm Caramel & Coffee Bronze Accents */
-  --color-accent: #c28d4b;
-  --color-accent-hover: #a87637;
-  --color-accent-light: #f7efe4;
-  --color-accent-glow: rgba(194, 141, 75, 0.28);
-  --color-espresso-dark: #261c14;
-  --color-espresso-rich: #32251b;
-  --color-crema: #d9a86c;
+  /* Coffee Buttons & Accents */
+  --color-btn-dark: #322016;
+  --color-btn-dark-hover: #493022;
+  --color-btn-dark-active: #22140d;
+  --color-btn-light: #ffffff;
+  --color-btn-light-hover: #f5ede1;
+  --color-accent-gold: #c68a4c;
+  --color-star: #e5a133;
+  --color-heart: #c94a4a;
+  --color-heart-inactive: #8b8077;
 
-  /* Architectural Hairline Borders */
-  --color-border: rgba(28, 24, 21, 0.08);
-  --color-border-light: rgba(28, 24, 21, 0.14);
-  --color-border-focus: #c28d4b;
-  --color-error: #b94236;
-  --color-success: #3c7d54;
+  /* Borders & Dividers */
+  --color-border: #ebdcd0;
+  --color-border-subtle: #f0e6dd;
+  --color-border-card: #eee6dc;
+  --color-border-dark: rgba(255, 255, 255, 0.12);
 
   /* Typography */
   --font-display: 'Playfair Display', Georgia, serif;
-  --font-sans: 'Outfit', 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+  --font-sans: 'Outfit', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
 
   /* Type Scale */
-  --text-xs: 0.72rem;
-  --text-sm: 0.85rem;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
   --text-base: 1rem;
-  --text-lg: 1.15rem;
-  --text-xl: 1.35rem;
-  --text-2xl: 1.85rem;
-  --text-3xl: clamp(2.0rem, 3.6vw, 3.0rem);
-  --text-huge: clamp(2.5rem, 4.6vw, 4.2rem);
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.625rem;
+  --text-3xl: clamp(1.85rem, 3.2vw, 2.5rem);
+  --text-hero: clamp(2.4rem, 4.8vw, 3.8rem);
 
   /* Spacing Scale */
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
   --space-4: 1rem;
-  --space-5: 1.5rem;
-  --space-6: 2rem;
-  --space-8: 3rem;
-  --space-10: 4rem;
-  --space-12: 5rem;
-  --space-16: 7rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
 
-  --container-max: 1320px;
-  --container-padding: clamp(1.25rem, 4vw, 2.5rem);
+  /* Containers */
+  --container-max: 1200px;
+  --container-padding: clamp(1.25rem, 3.5vw, 2.25rem);
 
-  /* Layering */
-  --z-bg: 0;
-  --z-content: 10;
-  --z-sticky: 50;
-  --z-nav: 100;
-  --z-modal: 200;
-  --z-tooltip: 300;
-
-  /* Transitions */
-  --transition-fast: 160ms cubic-bezier(0.2, 0, 0, 1);
-  --transition-base: 300ms cubic-bezier(0.2, 0, 0, 1);
-  --transition-slow: 550ms cubic-bezier(0.16, 1, 0.3, 1);
-  --transition-spring: 650ms cubic-bezier(0.34, 1.45, 0.64, 1);
-
-  /* Border Radii */
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 16px;
+  /* Border Radii (Figma Style) */
+  --radius-xs: 6px;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
   --radius-xl: 24px;
-  --radius-full: 9999px;
+  --radius-pill: 9999px;
 
   /* Shadows */
-  --shadow-sm: 0 1px 3px rgba(28, 24, 21, 0.04), 0 1px 2px rgba(28, 24, 21, 0.02);
-  --shadow-md: 0 8px 24px -6px rgba(28, 24, 21, 0.06), 0 2px 6px -1px rgba(28, 24, 21, 0.03);
-  --shadow-lg: 0 20px 48px -12px rgba(28, 24, 21, 0.09), 0 4px 12px -2px rgba(28, 24, 21, 0.04);
-  --shadow-glow: 0 0 35px rgba(194, 141, 75, 0.2);
+  --shadow-card: 0 4px 20px rgba(45, 30, 20, 0.06);
+  --shadow-card-hover: 0 12px 28px rgba(45, 30, 20, 0.12);
+  --shadow-dropdown: 0 12px 36px rgba(0, 0, 0, 0.18);
+  --shadow-glow: 0 0 40px rgba(198, 138, 76, 0.25);
 
-  /* Navigation Bar */
-  --nav-height: 76px;
-  --nav-height-scrolled: 64px;
+  /* Transitions */
+  --transition-fast: 180ms ease;
+  --transition-base: 280ms ease;
+  --transition-smooth: 400ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Z-Index */
+  --z-nav: 100;
+  --z-modal: 200;
+  --z-toast: 300;
 }
 
 @media (prefers-reduced-motion: reduce) {
   :root {
     --transition-fast: 0ms;
     --transition-base: 0ms;
-    --transition-slow: 0ms;
-    --transition-spring: 0ms;
+    --transition-smooth: 0ms;
   }
 }
