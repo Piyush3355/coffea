@@ -440,9 +440,10 @@ img {
   align-items: center;
   position: relative;
   gap: var(--space-4);
+  perspective: 1200px;
 }
 
-.hero-3d-wrapper {
+.hero-cup-showcase {
   position: relative;
   width: 100%;
   max-width: 460px;
@@ -450,46 +451,86 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1);
 }
 
-.hero-3d-canvas {
-  width: 100% !important;
-  height: 100% !important;
-  display: block;
-  z-index: 2;
-  cursor: grab;
-  touch-action: none;
-  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.65));
-  transition: transform var(--transition-fast);
-}
-
-.hero-3d-canvas:active {
-  cursor: grabbing;
-}
-
-.hero-fallback-img {
-  position: absolute;
-  top: 0;
-  left: 0;
+.hero-cup-real-img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  border-radius: 50%;
-  box-shadow: 
-    0 24px 60px rgba(0, 0, 0, 0.7),
-    0 0 70px rgba(198, 138, 76, 0.25);
-  z-index: 1;
-  transition: opacity var(--transition-base);
+  object-fit: contain;
+  filter: 
+    drop-shadow(0 24px 45px rgba(0, 0, 0, 0.75))
+    drop-shadow(0 0 35px rgba(198, 138, 76, 0.2));
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform 0.15s cubic-bezier(0.2, 0, 0, 1);
+  animation: heroFloat 4.5s ease-in-out infinite;
+}
+
+@keyframes heroFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(0.8deg);
+  }
 }
 
 .hero-cup-glow {
   position: absolute;
-  inset: -25px;
+  inset: -15px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(198, 138, 76, 0.26) 0%, rgba(198, 138, 76, 0.08) 45%, transparent 70%);
+  background: radial-gradient(circle, rgba(198, 138, 76, 0.22) 0%, rgba(198, 138, 76, 0.06) 45%, transparent 70%);
   pointer-events: none;
   z-index: 0;
   transition: opacity var(--transition-smooth);
+}
+
+/* Subtle Realistic Steam Particles */
+.steam-container {
+  position: absolute;
+  top: 38%;
+  left: 36%;
+  width: 90px;
+  height: 90px;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.65;
+}
+
+.steam-wisp {
+  position: absolute;
+  bottom: 0;
+  width: 18px;
+  height: 55px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.45) 0%, rgba(245, 235, 220, 0.18) 40%, transparent 80%);
+  filter: blur(5px);
+  animation: steamRise 3.6s infinite ease-out;
+}
+
+.steam-1 { left: 15px; animation-delay: 0s; }
+.steam-2 { left: 38px; animation-delay: 1.2s; height: 65px; width: 22px; }
+.steam-3 { left: 58px; animation-delay: 2.2s; }
+
+@keyframes steamRise {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scaleX(0.7) scaleY(0.7);
+  }
+  30% {
+    opacity: 0.55;
+  }
+  70% {
+    opacity: 0.35;
+    transform: translateY(-30px) scaleX(1.3) scaleY(1.3) rotate(6deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-55px) scaleX(1.8) scaleY(1.6) rotate(-8deg);
+  }
 }
 
 .hero-3d-cue {

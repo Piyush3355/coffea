@@ -1,7 +1,6 @@
 import './styles/main.css';
-import { Hero3DScene } from './hero3d.js';
 
-console.log('☕ Coffea Coffee Shop & Bakery — Clean UI with 3D Starting Hero Animation');
+console.log('☕ Coffea Coffee Shop & Bakery — Clean UI with Realistic Hero Interaction');
 
 // ─── PRODUCT CATALOG (COFFEE, DESSERTS & BEANS) ─────────────────────────────
 const CATALOG = [
@@ -778,15 +777,82 @@ function setupScrollSpy() {
   sections.forEach((sec) => observer.observe(sec));
 }
 
+// ─── REALISTIC HERO INTERACTION (TILT ON MOUSE & ROTATE ON SCROLL) ──────────
+function setupRealisticHeroInteraction() {
+  const heroSection = document.getElementById('hero');
+  const cupContainer = document.getElementById('hero-cup-showcase');
+  if (!heroSection || !cupContainer) return;
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion) return;
+
+  let mouseX = 0;
+  let mouseY = 0;
+  let targetMouseX = 0;
+  let targetMouseY = 0;
+  let scrollY = 0;
+
+  // 1. Mouse Move 3D Perspective Tilt
+  heroSection.addEventListener('mousemove', (e) => {
+    const rect = heroSection.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    targetMouseX = x * 16; // degrees
+    targetMouseY = y * 14;
+  });
+
+  heroSection.addEventListener('mouseleave', () => {
+    targetMouseX = 0;
+    targetMouseY = 0;
+  });
+
+  // 2. Scroll tracking
+  window.addEventListener('scroll', () => {
+    scrollY = window.scrollY;
+  }, { passive: true });
+
+  // 3. Smooth Lerp Animation Loop
+  let rafId = null;
+  const render = () => {
+    mouseX += (targetMouseX - mouseX) * 0.08;
+    mouseY += (targetMouseY - mouseY) * 0.08;
+
+    const heroHeight = heroSection.offsetHeight || 600;
+    const scrollFactor = Math.min(1.2, Math.max(0, scrollY / (heroHeight * 0.85)));
+    const scrollRotate = scrollFactor * 32; // smooth spin degrees
+    const scrollDrop = scrollFactor * 40; // px
+
+    cupContainer.style.transform = `
+      translate3d(0, ${scrollDrop}px, 0)
+      rotate(${scrollRotate}deg)
+      rotateX(${-mouseY}deg)
+      rotateY(${mouseX}deg)
+    `;
+
+    rafId = requestAnimationFrame(render);
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        if (!rafId) {
+          rafId = requestAnimationFrame(render);
+        }
+      } else {
+        if (rafId) {
+          cancelAnimationFrame(rafId);
+          rafId = null;
+        }
+      }
+    });
+  }, { threshold: 0.05 });
+
+  observer.observe(heroSection);
+}
+
 // ─── INITIALIZE APPLICATION ─────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-  // Initialize 3D Hero Experience
-  const heroCanvas = document.getElementById('hero-3d-canvas');
-  const heroFallback = document.getElementById('hero-fallback-img');
-  if (heroCanvas) {
-    new Hero3DScene(heroCanvas, heroFallback);
-  }
-
+  setupRealisticHeroInteraction();
   cart.init();
   wishlist.init();
   setupScrollProgressAndParallax();
