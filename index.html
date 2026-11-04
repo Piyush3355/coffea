@@ -1,19 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Coffea — Free Responsive Coffee Shop Website. Artisanal coffees, handcrafted desserts, and fresh roasted beans.">
+  <meta name="description"
+    content="Coffea — Free Responsive Coffee Shop Website. Artisanal coffees, handcrafted desserts, and fresh roasted beans.">
   <meta name="theme-color" content="#130f0c">
   <title>Coffea — Specialty Coffee Shop &amp; Bakery</title>
 
   <!-- Google Fonts: Playfair Display + Outfit -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
   <link rel="stylesheet" href="/src/styles/main.css">
 </head>
+
 <body class="coffea-app">
 
   <!-- ─── 00 / TOP HAIRLINE SCROLL PROGRESS BAR ─── -->
@@ -36,17 +41,20 @@
       </nav>
 
       <div class="header__actions">
-        <!-- Search Button -->
-        <button class="icon-circle-btn" id="open-search-btn" aria-label="Open search dialog" type="button">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <!-- Search Button (White circular pill matching Figma) -->
+        <button class="icon-circle-btn icon-circle-btn--search" id="open-search-btn" aria-label="Open search dialog" type="button">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"
+            stroke-linecap="round" stroke-linejoin="round">
             <circle cx="11" cy="11" r="8"></circle>
             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
           </svg>
         </button>
 
         <!-- Cart / Order Button with Badge -->
-        <button class="icon-circle-btn icon-circle-btn--cart" id="open-cart-btn" aria-label="View current order" type="button">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <button class="icon-circle-btn icon-circle-btn--cart" id="open-cart-btn" aria-label="View current order"
+          type="button">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+            stroke-linecap="round" stroke-linejoin="round">
             <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
             <line x1="3" y1="6" x2="21" y2="6"></line>
             <path d="M16 10a4 4 0 0 1-8 0"></path>
@@ -55,7 +63,8 @@
         </button>
 
         <!-- Mobile Menu Toggle -->
-        <button class="mobile-toggle" id="mobile-menu-toggle" aria-expanded="false" aria-controls="main-nav" aria-label="Toggle navigation menu">
+        <button class="mobile-toggle" id="mobile-menu-toggle" aria-expanded="false" aria-controls="main-nav"
+          aria-label="Toggle navigation menu">
           <span></span>
           <span></span>
           <span></span>
@@ -65,12 +74,12 @@
   </header>
 
   <main id="main-content">
-    
-    <!-- ─── 02 / HERO SECTION ─── -->
+
+    <!-- ─── 02 / HERO SECTION (EXACT FIGMA DESIGN) ─── -->
     <section class="hero-section" id="hero">
       <div class="hero-container">
-        
-        <div class="hero-content scroll-reveal">
+
+        <div class="hero-content scroll-reveal" id="hero-content">
           <span class="hero-kicker">WELCOME</span>
           <h1 class="hero-heading">
             We serve the<br>
@@ -78,27 +87,19 @@
             the city!
           </h1>
           <p class="hero-description">
-            Experience the harmony of freshly roasted single-origin beans, precision espresso crafting, and decadent handmade pastries baked fresh every dawn.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
           </p>
           <div class="hero-cta-wrap">
             <a href="#special-coffee" class="btn btn-pill-white">Order Now</a>
-            <a href="#categories" class="hero-link-subtle">Explore categories &rarr;</a>
           </div>
         </div>
 
-        <div class="hero-visual scroll-reveal" id="hero-visual">
-          <div class="hero-cup-showcase" id="hero-cup-showcase">
-            <img src="/images/hero-cup-user.png" alt="A freshly brewed rich artisan cup of coffee on a white saucer with roasted coffee beans" class="hero-cup-real-img" id="hero-cup-real-img">
-            <div class="hero-cup-glow" id="hero-cup-glow" aria-hidden="true"></div>
-            <div class="steam-container" aria-hidden="true">
-              <span class="steam-wisp steam-1"></span>
-              <span class="steam-wisp steam-2"></span>
-              <span class="steam-wisp steam-3"></span>
-            </div>
-          </div>
-          <div class="hero-3d-cue" aria-hidden="true">
-            <span class="cue-dot"></span>
-            <span class="cue-text">ARTISAN COFFEA · SCROLL TO ROTATE</span>
+        <div class="hero-visual" id="hero-visual" aria-hidden="true">
+          <!-- Subtle steam rising naturally from the background's latte cup -->
+          <div class="latte-steam-wrap" id="latte-steam-wrap">
+            <span class="steam-wisp steam-wisp--1"></span>
+            <span class="steam-wisp steam-wisp--2"></span>
+            <span class="steam-wisp steam-wisp--3"></span>
           </div>
         </div>
 
@@ -108,7 +109,7 @@
     <!-- ─── 02.5 / TRUST METRICS BAR (SMOOTH SCROLL COUNTER) ─── -->
     <section class="trust-metrics-section" id="trust-metrics" aria-label="Coffea Highlights">
       <div class="trust-metrics-container">
-        
+
         <div class="metric-item scroll-reveal">
           <div class="metric-value-wrap">
             <span class="metric-num" data-target="14">0</span><span class="metric-suffix">+</span>
@@ -149,10 +150,11 @@
     <!-- ─── 03 / CATEGORIES BAR ─── -->
     <section class="category-strip-section" id="categories" aria-label="Menu Categories">
       <div class="category-strip-container reveal-stagger">
-        
+
         <button class="category-card category-card--active" data-category="hot-coffee" type="button">
           <div class="category-icon-wrap" aria-hidden="true">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
               <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
               <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
               <line x1="6" y1="1" x2="6" y2="4"></line>
@@ -165,7 +167,8 @@
 
         <button class="category-card" data-category="cold-coffee" type="button">
           <div class="category-icon-wrap" aria-hidden="true">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
               <path d="M7 3h10l-2 18H9L7 3z"></path>
               <line x1="5" y1="3" x2="19" y2="3"></line>
               <line x1="12" y1="1" x2="15" y2="8"></line>
@@ -177,7 +180,8 @@
 
         <button class="category-card" data-category="cup-coffee" type="button">
           <div class="category-icon-wrap" aria-hidden="true">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
               <path d="M6 3h12l-1.5 17a2 2 0 0 1-2 1.8H9.5a2 2 0 0 1-2-1.8L6 3z"></path>
               <path d="M4 3h16"></path>
               <path d="M6 7h12"></path>
@@ -188,7 +192,8 @@
 
         <button class="category-card" data-category="dessert" type="button">
           <div class="category-icon-wrap" aria-hidden="true">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
               <path d="M20 21v-8a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8"></path>
               <path d="M4 16s2-1 4-1 4 1 4 1 2-1 4-1 4 1 4 1"></path>
               <path d="M2 21h20"></path>
@@ -205,37 +210,47 @@
     <!-- ─── 04 / OUR SPECIAL COFFEE ─── -->
     <section class="product-section" id="special-coffee" aria-labelledby="coffee-title">
       <div class="section-container">
-        
+
         <div class="section-header-row scroll-reveal">
           <h2 class="section-title" id="coffee-title">OUR SPECIAL COFFEE</h2>
-          
+
           <div class="carousel-nav-controls" aria-label="Coffee carousel controls">
             <button class="carousel-arrow prev" data-track="coffee-track" aria-label="Previous coffee items">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
             </button>
             <button class="carousel-arrow next" data-track="coffee-track" aria-label="Next coffee items">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
             </button>
           </div>
         </div>
 
         <div class="carousel-viewport">
           <div class="products-grid carousel-track reveal-stagger" id="coffee-track" role="list">
-            
+
             <!-- Item 1: Lungo Coffee -->
             <article class="product-card" data-category="hot-coffee" role="listitem">
               <div class="product-img-box">
                 <img src="/images/coffee-1.jpg" alt="Lungo coffee in a ceramic cup" class="product-img" loading="lazy">
                 <button class="wishlist-btn" aria-label="Save Lungo coffee to favorites" data-id="c-1">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                      d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                    </path>
+                  </svg>
                 </button>
               </div>
               <div class="product-info">
                 <h3 class="product-name">Lungo coffee</h3>
-                <p class="product-desc">Rich double shot espresso pulled with extended water volume for aromatic smoothness.</p>
+                <p class="product-desc">Rich double shot espresso pulled with extended water volume for aromatic
+                  smoothness.</p>
                 <div class="product-bottom-row">
                   <span class="product-price">Rs. 200</span>
-                  <button class="btn btn-order" data-id="c-1" data-name="Lungo coffee" data-price="200" data-img="/images/coffee-1.jpg" type="button">Order Now</button>
+                  <button class="btn btn-order" data-id="c-1" data-name="Lungo coffee" data-price="200"
+                    data-img="/images/coffee-1.jpg" type="button">Order Now</button>
                 </div>
               </div>
             </article>
@@ -243,17 +258,24 @@
             <!-- Item 2: Caramel Macchiato -->
             <article class="product-card" data-category="hot-coffee" role="listitem">
               <div class="product-img-box">
-                <img src="/images/coffee-2.jpg" alt="Caramel Macchiato with vanilla and espresso" class="product-img" loading="lazy">
+                <img src="/images/coffee-2.jpg" alt="Caramel Macchiato with vanilla and espresso" class="product-img"
+                  loading="lazy">
                 <button class="wishlist-btn" aria-label="Save Caramel Macchiato to favorites" data-id="c-2">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                      d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                    </path>
+                  </svg>
                 </button>
               </div>
               <div class="product-info">
                 <h3 class="product-name">Caramel Macchiato</h3>
-                <p class="product-desc">Steamed velvety milk marked with intense espresso and crowned with artisanal buttery caramel drizzle.</p>
+                <p class="product-desc">Steamed velvety milk marked with intense espresso and crowned with artisanal
+                  buttery caramel drizzle.</p>
                 <div class="product-bottom-row">
                   <span class="product-price">Rs. 240</span>
-                  <button class="btn btn-order" data-id="c-2" data-name="Caramel Macchiato" data-price="240" data-img="/images/coffee-2.jpg" type="button">Order Now</button>
+                  <button class="btn btn-order" data-id="c-2" data-name="Caramel Macchiato" data-price="240"
+                    data-img="/images/coffee-2.jpg" type="button">Order Now</button>
                 </div>
               </div>
             </article>
@@ -261,17 +283,24 @@
             <!-- Item 3: Vanilla Cappuccino -->
             <article class="product-card" data-category="hot-coffee" role="listitem">
               <div class="product-img-box">
-                <img src="/images/coffee-3.jpg" alt="Vanilla Cappuccino with dense foam" class="product-img" loading="lazy">
+                <img src="/images/coffee-3.jpg" alt="Vanilla Cappuccino with dense foam" class="product-img"
+                  loading="lazy">
                 <button class="wishlist-btn" aria-label="Save Vanilla Cappuccino to favorites" data-id="c-3">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                      d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                    </path>
+                  </svg>
                 </button>
               </div>
               <div class="product-info">
                 <h3 class="product-name">Vanilla Cappuccino</h3>
-                <p class="product-desc">Equal parts bold espresso, hot milk, and thick foam dusted with real Madagascar vanilla pod.</p>
+                <p class="product-desc">Equal parts bold espresso, hot milk, and thick foam dusted with real Madagascar
+                  vanilla pod.</p>
                 <div class="product-bottom-row">
                   <span class="product-price">Rs. 220</span>
-                  <button class="btn btn-order" data-id="c-3" data-name="Vanilla Cappuccino" data-price="220" data-img="/images/coffee-3.jpg" type="button">Order Now</button>
+                  <button class="btn btn-order" data-id="c-3" data-name="Vanilla Cappuccino" data-price="220"
+                    data-img="/images/coffee-3.jpg" type="button">Order Now</button>
                 </div>
               </div>
             </article>
@@ -279,17 +308,24 @@
             <!-- Item 4: Hazelnut Flat White -->
             <article class="product-card" data-category="hot-coffee" role="listitem">
               <div class="product-img-box">
-                <img src="/images/coffee-4.jpg" alt="Hazelnut Flat White with latte art" class="product-img" loading="lazy">
+                <img src="/images/coffee-4.jpg" alt="Hazelnut Flat White with latte art" class="product-img"
+                  loading="lazy">
                 <button class="wishlist-btn" aria-label="Save Hazelnut Flat White to favorites" data-id="c-4">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                      d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                    </path>
+                  </svg>
                 </button>
               </div>
               <div class="product-info">
                 <h3 class="product-name">Hazelnut Flat White</h3>
-                <p class="product-desc">Delicate micro-foam infused with roasted Piedmont hazelnuts poured over a bold double ristretto.</p>
+                <p class="product-desc">Delicate micro-foam infused with roasted Piedmont hazelnuts poured over a bold
+                  double ristretto.</p>
                 <div class="product-bottom-row">
                   <span class="product-price">Rs. 250</span>
-                  <button class="btn btn-order" data-id="c-4" data-name="Hazelnut Flat White" data-price="250" data-img="/images/coffee-4.jpg" type="button">Order Now</button>
+                  <button class="btn btn-order" data-id="c-4" data-name="Hazelnut Flat White" data-price="250"
+                    data-img="/images/coffee-4.jpg" type="button">Order Now</button>
                 </div>
               </div>
             </article>
@@ -297,17 +333,24 @@
             <!-- Item 5: Nitro Cascade Cold Brew -->
             <article class="product-card" data-category="cold-coffee" role="listitem">
               <div class="product-img-box">
-                <img src="/images/coffee-5.jpg" alt="Iced cold brew coffee in a tall glass" class="product-img" loading="lazy">
+                <img src="/images/coffee-5.jpg" alt="Iced cold brew coffee in a tall glass" class="product-img"
+                  loading="lazy">
                 <button class="wishlist-btn" aria-label="Save Nitro Cold Brew to favorites" data-id="c-5">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                      d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                    </path>
+                  </svg>
                 </button>
               </div>
               <div class="product-info">
                 <h3 class="product-name">Nitro Cold Brew</h3>
-                <p class="product-desc">18-hour cold steeped single-origin coffee infused with nitrogen for a creamy, naturally sweet head.</p>
+                <p class="product-desc">18-hour cold steeped single-origin coffee infused with nitrogen for a creamy,
+                  naturally sweet head.</p>
                 <div class="product-bottom-row">
                   <span class="product-price">Rs. 260</span>
-                  <button class="btn btn-order" data-id="c-5" data-name="Nitro Cold Brew" data-price="260" data-img="/images/coffee-5.jpg" type="button">Order Now</button>
+                  <button class="btn btn-order" data-id="c-5" data-name="Nitro Cold Brew" data-price="260"
+                    data-img="/images/coffee-5.jpg" type="button">Order Now</button>
                 </div>
               </div>
             </article>
@@ -315,17 +358,24 @@
             <!-- Item 6: Single-Origin Espresso -->
             <article class="product-card" data-category="cup-coffee" role="listitem">
               <div class="product-img-box">
-                <img src="/images/coffee-6.jpg" alt="Single-Origin Espresso cup with golden crema" class="product-img" loading="lazy">
+                <img src="/images/coffee-6.jpg" alt="Single-Origin Espresso cup with golden crema" class="product-img"
+                  loading="lazy">
                 <button class="wishlist-btn" aria-label="Save Single-Origin Espresso to favorites" data-id="c-6">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                      d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                    </path>
+                  </svg>
                 </button>
               </div>
               <div class="product-info">
                 <h3 class="product-name">Origin Espresso</h3>
-                <p class="product-desc">Washed Ethiopian Yirgacheffe pulling vibrant citrus sweetness, jasmine florality, and dark chocolate.</p>
+                <p class="product-desc">Washed Ethiopian Yirgacheffe pulling vibrant citrus sweetness, jasmine
+                  florality, and dark chocolate.</p>
                 <div class="product-bottom-row">
                   <span class="product-price">Rs. 180</span>
-                  <button class="btn btn-order" data-id="c-6" data-name="Origin Espresso" data-price="180" data-img="/images/coffee-6.jpg" type="button">Order Now</button>
+                  <button class="btn btn-order" data-id="c-6" data-name="Origin Espresso" data-price="180"
+                    data-img="/images/coffee-6.jpg" type="button">Order Now</button>
                 </div>
               </div>
             </article>
@@ -339,37 +389,47 @@
     <!-- ─── 05 / OUR SPECIAL DESSERT ─── -->
     <section class="product-section" id="special-dessert" aria-labelledby="dessert-title">
       <div class="section-container">
-        
+
         <div class="section-header-row scroll-reveal">
           <h2 class="section-title" id="dessert-title">OUR SPECIAL DESSERT</h2>
-          
+
           <div class="carousel-nav-controls" aria-label="Dessert carousel controls">
             <button class="carousel-arrow prev" data-track="dessert-track" aria-label="Previous dessert items">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
             </button>
             <button class="carousel-arrow next" data-track="dessert-track" aria-label="Next dessert items">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
             </button>
           </div>
         </div>
 
         <div class="carousel-viewport">
           <div class="products-grid carousel-track reveal-stagger" id="dessert-track" role="list">
-            
+
             <!-- Dessert 1: French Butter Croissant -->
             <article class="product-card" data-category="dessert" role="listitem">
               <div class="product-img-box">
                 <img src="/images/dessert-1.jpg" alt="Golden baked butter croissant" class="product-img" loading="lazy">
                 <button class="wishlist-btn" aria-label="Save Butter Croissant to favorites" data-id="d-1">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                      d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                    </path>
+                  </svg>
                 </button>
               </div>
               <div class="product-info">
                 <h3 class="product-name">Butter Croissant</h3>
-                <p class="product-desc">Authentic flaky French pastry laminated with pure cultured Normandy butter, baked fresh every morning.</p>
+                <p class="product-desc">Authentic flaky French pastry laminated with pure cultured Normandy butter,
+                  baked fresh every morning.</p>
                 <div class="product-bottom-row">
                   <span class="product-price">Rs. 160</span>
-                  <button class="btn btn-order" data-id="d-1" data-name="Butter Croissant" data-price="160" data-img="/images/dessert-1.jpg" type="button">Order Now</button>
+                  <button class="btn btn-order" data-id="d-1" data-name="Butter Croissant" data-price="160"
+                    data-img="/images/dessert-1.jpg" type="button">Order Now</button>
                 </div>
               </div>
             </article>
@@ -379,15 +439,21 @@
               <div class="product-img-box">
                 <img src="/images/dessert-2.jpg" alt="Classic Italian Tiramisu" class="product-img" loading="lazy">
                 <button class="wishlist-btn" aria-label="Save Classic Tiramisu to favorites" data-id="d-2">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                      d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                    </path>
+                  </svg>
                 </button>
               </div>
               <div class="product-info">
                 <h3 class="product-name">Classic Tiramisu</h3>
-                <p class="product-desc">Espresso-drenched Savoiardi biscuits layered with light mascarpone mousse and Valrhona cocoa.</p>
+                <p class="product-desc">Espresso-drenched Savoiardi biscuits layered with light mascarpone mousse and
+                  Valrhona cocoa.</p>
                 <div class="product-bottom-row">
                   <span class="product-price">Rs. 260</span>
-                  <button class="btn btn-order" data-id="d-2" data-name="Classic Tiramisu" data-price="260" data-img="/images/dessert-2.jpg" type="button">Order Now</button>
+                  <button class="btn btn-order" data-id="d-2" data-name="Classic Tiramisu" data-price="260"
+                    data-img="/images/dessert-2.jpg" type="button">Order Now</button>
                 </div>
               </div>
             </article>
@@ -395,17 +461,24 @@
             <!-- Dessert 3: New York Cheesecake -->
             <article class="product-card" data-category="dessert" role="listitem">
               <div class="product-img-box">
-                <img src="/images/dessert-3.jpg" alt="New York Cheesecake with vanilla" class="product-img" loading="lazy">
+                <img src="/images/dessert-3.jpg" alt="New York Cheesecake with vanilla" class="product-img"
+                  loading="lazy">
                 <button class="wishlist-btn" aria-label="Save New York Cheesecake to favorites" data-id="d-3">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                      d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                    </path>
+                  </svg>
                 </button>
               </div>
               <div class="product-info">
                 <h3 class="product-name">New York Cheesecake</h3>
-                <p class="product-desc">Velvety dense cream cheese on a cinnamon-graham crust, kissed with real Madagascar vanilla bean.</p>
+                <p class="product-desc">Velvety dense cream cheese on a cinnamon-graham crust, kissed with real
+                  Madagascar vanilla bean.</p>
                 <div class="product-bottom-row">
                   <span class="product-price">Rs. 280</span>
-                  <button class="btn btn-order" data-id="d-3" data-name="New York Cheesecake" data-price="280" data-img="/images/dessert-3.jpg" type="button">Order Now</button>
+                  <button class="btn btn-order" data-id="d-3" data-name="New York Cheesecake" data-price="280"
+                    data-img="/images/dessert-3.jpg" type="button">Order Now</button>
                 </div>
               </div>
             </article>
@@ -415,15 +488,21 @@
               <div class="product-img-box">
                 <img src="/images/dessert-4.jpg" alt="Chocolate Hazelnut Tart" class="product-img" loading="lazy">
                 <button class="wishlist-btn" aria-label="Save Chocolate Hazelnut Tart to favorites" data-id="d-4">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                      d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                    </path>
+                  </svg>
                 </button>
               </div>
               <div class="product-info">
                 <h3 class="product-name">Chocolate Tart</h3>
-                <p class="product-desc">Crisp sablé shell brimming with 70% dark Belgian ganache and topped with toasted whole hazelnuts.</p>
+                <p class="product-desc">Crisp sablé shell brimming with 70% dark Belgian ganache and topped with toasted
+                  whole hazelnuts.</p>
                 <div class="product-bottom-row">
                   <span class="product-price">Rs. 240</span>
-                  <button class="btn btn-order" data-id="d-4" data-name="Chocolate Tart" data-price="240" data-img="/images/dessert-4.jpg" type="button">Order Now</button>
+                  <button class="btn btn-order" data-id="d-4" data-name="Chocolate Tart" data-price="240"
+                    data-img="/images/dessert-4.jpg" type="button">Order Now</button>
                 </div>
               </div>
             </article>
@@ -431,17 +510,24 @@
             <!-- Dessert 5: Cinnamon Swirl Roll -->
             <article class="product-card" data-category="dessert" role="listitem">
               <div class="product-img-box">
-                <img src="/images/dessert-5.jpg" alt="Cinnamon swirl roll with cream glaze" class="product-img" loading="lazy">
+                <img src="/images/dessert-5.jpg" alt="Cinnamon swirl roll with cream glaze" class="product-img"
+                  loading="lazy">
                 <button class="wishlist-btn" aria-label="Save Cinnamon Swirl Roll to favorites" data-id="d-5">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                      d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                    </path>
+                  </svg>
                 </button>
               </div>
               <div class="product-info">
                 <h3 class="product-name">Cinnamon Roll</h3>
-                <p class="product-desc">Pillowy brioche dough twisted with fragrant Ceylon cinnamon butter and frosted with cream glaze.</p>
+                <p class="product-desc">Pillowy brioche dough twisted with fragrant Ceylon cinnamon butter and frosted
+                  with cream glaze.</p>
                 <div class="product-bottom-row">
                   <span class="product-price">Rs. 180</span>
-                  <button class="btn btn-order" data-id="d-5" data-name="Cinnamon Roll" data-price="180" data-img="/images/dessert-5.jpg" type="button">Order Now</button>
+                  <button class="btn btn-order" data-id="d-5" data-name="Cinnamon Roll" data-price="180"
+                    data-img="/images/dessert-5.jpg" type="button">Order Now</button>
                 </div>
               </div>
             </article>
@@ -451,15 +537,21 @@
               <div class="product-img-box">
                 <img src="/images/dessert-6.jpg" alt="Wild Berry Galette" class="product-img" loading="lazy">
                 <button class="wishlist-btn" aria-label="Save Wild Berry Galette to favorites" data-id="d-6">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                      d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                    </path>
+                  </svg>
                 </button>
               </div>
               <div class="product-info">
                 <h3 class="product-name">Wild Berry Galette</h3>
-                <p class="product-desc">Free-form butter crust stuffed with fresh mountain blackberries, blueberries, and fragrant lemon zest.</p>
+                <p class="product-desc">Free-form butter crust stuffed with fresh mountain blackberries, blueberries,
+                  and fragrant lemon zest.</p>
                 <div class="product-bottom-row">
                   <span class="product-price">Rs. 220</span>
-                  <button class="btn btn-order" data-id="d-6" data-name="Wild Berry Galette" data-price="220" data-img="/images/dessert-6.jpg" type="button">Order Now</button>
+                  <button class="btn btn-order" data-id="d-6" data-name="Wild Berry Galette" data-price="220"
+                    data-img="/images/dessert-6.jpg" type="button">Order Now</button>
                 </div>
               </div>
             </article>
@@ -473,9 +565,10 @@
     <!-- ─── 06 / CHECK OUT OUR BEST COFFEE BEANS BANNER ─── -->
     <section class="beans-banner-section" id="beans-promo" aria-label="Coffee Beans Special Offer">
       <div class="beans-banner-container scroll-reveal">
-        
+
         <div class="beans-banner-visual">
-          <img src="/images/beans-banner.jpg" alt="Hands scooping whole freshly roasted single origin coffee beans" class="beans-banner-img">
+          <img src="/images/beans-banner.jpg" alt="Hands scooping whole freshly roasted single origin coffee beans"
+            class="beans-banner-img">
         </div>
 
         <div class="beans-banner-content">
@@ -494,14 +587,14 @@
     <!-- ─── 07 / TESTIMONIALS: OUR HAPPY CUSTOMERS ─── -->
     <section class="testimonials-section" id="testimonials" aria-labelledby="testimonials-title">
       <div class="section-container text-center">
-        
+
         <div class="testimonials-header scroll-reveal">
           <span class="testimonials-kicker">Come and Join</span>
           <h2 class="testimonials-heading" id="testimonials-title">OUR HAPPY CUSTOMERS</h2>
         </div>
 
         <div class="testimonials-grid reveal-stagger" role="list">
-          
+
           <!-- Testimonial 1 -->
           <article class="testimonial-card" role="listitem">
             <div class="testimonial-author">
@@ -513,7 +606,8 @@
             </div>
             <div class="testimonial-stars" aria-label="5 stars rating">★★★★★</div>
             <p class="testimonial-quote">
-              "Coffea provides the most balanced Lungo I have ever tasted. The warm atmosphere and courteous baristas make every morning productive and enjoyable."
+              "Coffea provides the most balanced Lungo I have ever tasted. The warm atmosphere and courteous baristas
+              make every morning productive and enjoyable."
             </p>
           </article>
 
@@ -528,7 +622,8 @@
             </div>
             <div class="testimonial-stars" aria-label="5 stars rating">★★★★★</div>
             <p class="testimonial-quote">
-              "An extraordinary standard of coffee roasting in the city. The flat white is smooth down to the last drop, and the croissants are flaky perfection."
+              "An extraordinary standard of coffee roasting in the city. The flat white is smooth down to the last drop,
+              and the croissants are flaky perfection."
             </p>
           </article>
 
@@ -543,7 +638,8 @@
             </div>
             <div class="testimonial-stars" aria-label="5 stars rating">★★★★★</div>
             <p class="testimonial-quote">
-              "My daily morning sanctuary. Their nitro cold brew has an unbelievable stout-like crema and natural sweetness without adding any sugar."
+              "My daily morning sanctuary. Their nitro cold brew has an unbelievable stout-like crema and natural
+              sweetness without adding any sugar."
             </p>
           </article>
 
@@ -562,7 +658,7 @@
     <!-- ─── 08 / NEWSLETTER: JOIN IN AND GET 15% OFF ─── -->
     <section class="newsletter-section" id="newsletter" aria-labelledby="newsletter-title">
       <div class="newsletter-container scroll-reveal">
-        
+
         <h2 class="newsletter-title" id="newsletter-title">Join in and get 15% off!</h2>
         <p class="newsletter-subtitle">Subscribe to our newsletter to receive your exclusive 15% discount code.</p>
 
@@ -572,7 +668,8 @@
               <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
               <polyline points="22,6 12,13 2,6"></polyline>
             </svg>
-            <input type="email" id="newsletter-email" class="newsletter-input" placeholder="Enter your email address" required autocomplete="email">
+            <input type="email" id="newsletter-email" class="newsletter-input" placeholder="Enter your email address"
+              required autocomplete="email">
           </div>
           <button type="submit" class="btn btn-pill-dark btn-subscribe">Subscribe</button>
         </form>
@@ -587,9 +684,9 @@
   <!-- ─── 09 / FOOTER ─── -->
   <footer class="site-footer" role="contentinfo">
     <div class="footer-container">
-      
+
       <div class="footer-main-row scroll-reveal">
-        
+
         <div class="footer-col footer-col--brand">
           <a href="#hero" class="brand-logo brand-logo--footer">coffea</a>
           <p class="footer-brand-desc">
@@ -637,16 +734,29 @@
           <span class="footer-heading">SOCIAL MEDIA</span>
           <div class="social-icons-row">
             <a href="#" aria-label="X / Twitter" class="social-link">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+              </svg>
             </a>
             <a href="#" aria-label="Instagram" class="social-link">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
             </a>
             <a href="#" aria-label="Facebook" class="social-link">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+              </svg>
             </a>
             <a href="#" aria-label="LinkedIn" class="social-link">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                <rect x="2" y="9" width="4" height="12"></rect>
+                <circle cx="4" cy="4" r="2"></circle>
+              </svg>
             </a>
           </div>
         </div>
@@ -663,7 +773,8 @@
 
   <!-- ─── 10 / FLOATING SCROLL TO TOP BUTTON ─── -->
   <button class="scroll-to-top-btn" id="scroll-to-top-btn" aria-label="Scroll back to top of page" type="button">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+      stroke-linecap="round" stroke-linejoin="round">
       <polyline points="18 15 12 9 6 15"></polyline>
     </svg>
   </button>
@@ -701,7 +812,8 @@
         <button class="close-modal-btn" id="close-search-btn" aria-label="Close search">&times;</button>
       </div>
       <div class="search-input-wrap">
-        <input type="text" id="live-search-input" class="search-input" placeholder="Search coffee, dessert, beans..." autofocus>
+        <input type="text" id="live-search-input" class="search-input" placeholder="Search coffee, dessert, beans..."
+          autofocus>
       </div>
       <div class="search-results-list" id="search-results-list">
         <p class="search-hint">Type above to quickly find your favorite roast or bakery item.</p>
@@ -726,7 +838,8 @@
           <input type="password" id="login-pass" class="form-input" required placeholder="••••••••">
         </div>
         <button type="submit" class="btn btn-pill-dark btn-full">Sign In</button>
-        <p class="login-note">Don't have an account? <a href="#" onclick="alert('Registration open at roastery counter!'); return false;">Create an account</a></p>
+        <p class="login-note">Don't have an account? <a href="#"
+            onclick="alert('Registration open at roastery counter!'); return false;">Create an account</a></p>
       </form>
     </div>
   </dialog>
@@ -736,4 +849,5 @@
 
   <script type="module" src="/src/main.js"></script>
 </body>
+
 </html>

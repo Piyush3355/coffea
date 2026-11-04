@@ -777,77 +777,47 @@ function setupScrollSpy() {
   sections.forEach((sec) => observer.observe(sec));
 }
 
-// ─── REALISTIC HERO INTERACTION (TILT ON MOUSE & ROTATE ON SCROLL) ──────────
+// ─── REALISTIC HERO DEPTH & SCROLL PARALLAX ────────────────────────────────
 function setupRealisticHeroInteraction() {
   const heroSection = document.getElementById('hero');
-  const cupContainer = document.getElementById('hero-cup-showcase');
-  if (!heroSection || !cupContainer) return;
+  const heroContent = document.getElementById('hero-content');
+  const steamWrap = document.getElementById('latte-steam-wrap');
+  if (!heroSection || !heroContent) return;
 
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (prefersReducedMotion) return;
 
-  let mouseX = 0;
-  let mouseY = 0;
-  let targetMouseX = 0;
-  let targetMouseY = 0;
-  let scrollY = 0;
+  let ticking = false;
 
-  // 1. Mouse Move 3D Perspective Tilt
-  heroSection.addEventListener('mousemove', (e) => {
-    const rect = heroSection.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    targetMouseX = x * 16; // degrees
-    targetMouseY = y * 14;
-  });
+  const updateHeroParallax = () => {
+    const scrollY = window.scrollY;
+    const heroHeight = heroSection.offsetHeight || 700;
 
-  heroSection.addEventListener('mouseleave', () => {
-    targetMouseX = 0;
-    targetMouseY = 0;
-  });
+    if (scrollY <= heroHeight) {
+      const progress = Math.min(1, Math.max(0, scrollY / heroHeight));
+      
+      // Subtle cinematic upward glide for hero content
+      heroContent.style.transform = `translate3d(0, ${scrollY * 0.22}px, 0)`;
+      heroContent.style.opacity = `${Math.max(0, 1 - progress * 1.35)}`;
 
-  // 2. Scroll tracking
-  window.addEventListener('scroll', () => {
-    scrollY = window.scrollY;
-  }, { passive: true });
+      // Subtle rising parallax for steam
+      if (steamWrap) {
+        steamWrap.style.transform = `translate3d(0, ${-scrollY * 0.3}px, 0)`;
+      }
+    }
 
-  // 3. Smooth Lerp Animation Loop
-  let rafId = null;
-  const render = () => {
-    mouseX += (targetMouseX - mouseX) * 0.08;
-    mouseY += (targetMouseY - mouseY) * 0.08;
-
-    const heroHeight = heroSection.offsetHeight || 600;
-    const scrollFactor = Math.min(1.2, Math.max(0, scrollY / (heroHeight * 0.85)));
-    const scrollRotate = scrollFactor * 32; // smooth spin degrees
-    const scrollDrop = scrollFactor * 40; // px
-
-    cupContainer.style.transform = `
-      translate3d(0, ${scrollDrop}px, 0)
-      rotate(${scrollRotate}deg)
-      rotateX(${-mouseY}deg)
-      rotateY(${mouseX}deg)
-    `;
-
-    rafId = requestAnimationFrame(render);
+    ticking = false;
   };
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        if (!rafId) {
-          rafId = requestAnimationFrame(render);
-        }
-      } else {
-        if (rafId) {
-          cancelAnimationFrame(rafId);
-          rafId = null;
-        }
-      }
-    });
-  }, { threshold: 0.05 });
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(updateHeroParallax);
+      ticking = true;
+    }
+  }, { passive: true });
 
-  observer.observe(heroSection);
+  // Initial call
+  updateHeroParallax();
 }
 
 // ─── INITIALIZE APPLICATION ─────────────────────────────────────────────────
