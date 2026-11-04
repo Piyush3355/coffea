@@ -16,6 +16,11 @@
 </head>
 <body class="coffea-app">
 
+  <!-- ─── 00 / TOP HAIRLINE SCROLL PROGRESS BAR ─── -->
+  <div class="scroll-progress" id="scroll-progress" aria-hidden="true">
+    <div class="scroll-progress__bar" id="scroll-progress-bar"></div>
+  </div>
+
   <!-- ─── 01 / TOP NAVIGATION BAR ─── -->
   <header class="header" id="site-header">
     <div class="header__inner">
@@ -65,7 +70,7 @@
     <section class="hero-section" id="hero">
       <div class="hero-container">
         
-        <div class="hero-content">
+        <div class="hero-content scroll-reveal">
           <span class="hero-kicker">WELCOME</span>
           <h1 class="hero-heading">
             We serve the<br>
@@ -81,11 +86,52 @@
           </div>
         </div>
 
-        <div class="hero-visual">
-          <div class="hero-cup-wrap">
-            <img src="/images/hero-cup.jpg" alt="A freshly brewed cup of rich artisan coffee with latte art on a saucer surrounded by roasted beans" class="hero-cup-img">
-            <div class="hero-cup-glow" aria-hidden="true"></div>
+        <div class="hero-visual scroll-reveal" id="hero-visual" data-parallax="true">
+          <div class="hero-cup-wrap" id="hero-cup-wrap">
+            <img src="/images/hero-cup.jpg" alt="A freshly brewed cup of rich artisan coffee with latte art on a saucer surrounded by roasted beans" class="hero-cup-img" id="hero-cup-img">
+            <div class="hero-cup-glow" id="hero-cup-glow" aria-hidden="true"></div>
           </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ─── 02.5 / TRUST METRICS BAR (SMOOTH SCROLL COUNTER) ─── -->
+    <section class="trust-metrics-section" id="trust-metrics" aria-label="Coffea Highlights">
+      <div class="trust-metrics-container">
+        
+        <div class="metric-item scroll-reveal">
+          <div class="metric-value-wrap">
+            <span class="metric-num" data-target="14">0</span><span class="metric-suffix">+</span>
+          </div>
+          <span class="metric-label">Years Roasting</span>
+        </div>
+
+        <div class="metric-divider" aria-hidden="true"></div>
+
+        <div class="metric-item scroll-reveal">
+          <div class="metric-value-wrap">
+            <span class="metric-num" data-target="52">0</span><span class="metric-suffix">k+</span>
+          </div>
+          <span class="metric-label">Cups Handcrafted</span>
+        </div>
+
+        <div class="metric-divider" aria-hidden="true"></div>
+
+        <div class="metric-item scroll-reveal">
+          <div class="metric-value-wrap">
+            <span class="metric-num" data-target="100">0</span><span class="metric-suffix">%</span>
+          </div>
+          <span class="metric-label">Traceable Organic</span>
+        </div>
+
+        <div class="metric-divider" aria-hidden="true"></div>
+
+        <div class="metric-item scroll-reveal">
+          <div class="metric-value-wrap">
+            <span class="metric-num" data-target="4.9" data-decimals="1">0.0</span><span class="metric-suffix">★</span>
+          </div>
+          <span class="metric-label">3,200+ Reviews</span>
         </div>
 
       </div>
@@ -93,7 +139,7 @@
 
     <!-- ─── 03 / CATEGORIES BAR ─── -->
     <section class="category-strip-section" id="categories" aria-label="Menu Categories">
-      <div class="category-strip-container">
+      <div class="category-strip-container reveal-stagger">
         
         <button class="category-card category-card--active" data-category="hot-coffee" type="button">
           <div class="category-icon-wrap" aria-hidden="true">
@@ -151,7 +197,7 @@
     <section class="product-section" id="special-coffee" aria-labelledby="coffee-title">
       <div class="section-container">
         
-        <div class="section-header-row">
+        <div class="section-header-row scroll-reveal">
           <h2 class="section-title" id="coffee-title">OUR SPECIAL COFFEE</h2>
           
           <div class="carousel-nav-controls" aria-label="Coffee carousel controls">
@@ -165,7 +211,7 @@
         </div>
 
         <div class="carousel-viewport">
-          <div class="products-grid carousel-track" id="coffee-track" role="list">
+          <div class="products-grid carousel-track reveal-stagger" id="coffee-track" role="list">
             
             <!-- Item 1: Lungo Coffee -->
             <article class="product-card" data-category="hot-coffee" role="listitem">
@@ -285,7 +331,7 @@
     <section class="product-section" id="special-dessert" aria-labelledby="dessert-title">
       <div class="section-container">
         
-        <div class="section-header-row">
+        <div class="section-header-row scroll-reveal">
           <h2 class="section-title" id="dessert-title">OUR SPECIAL DESSERT</h2>
           
           <div class="carousel-nav-controls" aria-label="Dessert carousel controls">
@@ -299,7 +345,7 @@
         </div>
 
         <div class="carousel-viewport">
-          <div class="products-grid carousel-track" id="dessert-track" role="list">
+          <div class="products-grid carousel-track reveal-stagger" id="dessert-track" role="list">
             
             <!-- Dessert 1: French Butter Croissant -->
             <article class="product-card" data-category="dessert" role="listitem">
@@ -417,7 +463,7 @@
 
     <!-- ─── 06 / CHECK OUT OUR BEST COFFEE BEANS BANNER ─── -->
     <section class="beans-banner-section" id="beans-promo" aria-label="Coffee Beans Special Offer">
-      <div class="beans-banner-container">
+      <div class="beans-banner-container scroll-reveal">
         
         <div class="beans-banner-visual">
           <img src="/images/beans-banner.jpg" alt="Hands scooping whole freshly roasted single origin coffee beans" class="beans-banner-img">
@@ -440,12 +486,12 @@
     <section class="testimonials-section" id="testimonials" aria-labelledby="testimonials-title">
       <div class="section-container text-center">
         
-        <div class="testimonials-header">
+        <div class="testimonials-header scroll-reveal">
           <span class="testimonials-kicker">Come and Join</span>
           <h2 class="testimonials-heading" id="testimonials-title">OUR HAPPY CUSTOMERS</h2>
         </div>
 
-        <div class="testimonials-grid" role="list">
+        <div class="testimonials-grid reveal-stagger" role="list">
           
           <!-- Testimonial 1 -->
           <article class="testimonial-card" role="listitem">
@@ -506,7 +552,7 @@
 
     <!-- ─── 08 / NEWSLETTER: JOIN IN AND GET 15% OFF ─── -->
     <section class="newsletter-section" id="newsletter" aria-labelledby="newsletter-title">
-      <div class="newsletter-container">
+      <div class="newsletter-container scroll-reveal">
         
         <h2 class="newsletter-title" id="newsletter-title">Join in and get 15% off!</h2>
         <p class="newsletter-subtitle">Subscribe to our newsletter to receive your exclusive 15% discount code.</p>
@@ -533,7 +579,7 @@
   <footer class="site-footer" role="contentinfo">
     <div class="footer-container">
       
-      <div class="footer-main-row">
+      <div class="footer-main-row scroll-reveal">
         
         <div class="footer-col footer-col--brand">
           <a href="#hero" class="brand-logo brand-logo--footer">coffea</a>
@@ -606,7 +652,14 @@
     </div>
   </footer>
 
-  <!-- ─── 10 / MODALS & SLIDE-OUT DRAWERS ─── -->
+  <!-- ─── 10 / FLOATING SCROLL TO TOP BUTTON ─── -->
+  <button class="scroll-to-top-btn" id="scroll-to-top-btn" aria-label="Scroll back to top of page" type="button">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
+
+  <!-- ─── 11 / MODALS & SLIDE-OUT DRAWERS ─── -->
 
   <!-- Order / Cart Slide-Out Drawer -->
   <aside class="cart-drawer" id="cart-drawer" aria-labelledby="cart-heading" aria-hidden="true">

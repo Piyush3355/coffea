@@ -1,6 +1,6 @@
 import './styles/main.css';
 
-console.log('☕ Coffea Coffee Shop & Bakery — Clean Responsive UI Initialized');
+console.log('☕ Coffea Coffee Shop & Bakery — Clean UI with Smooth Scroll Transitions');
 
 // ─── PRODUCT CATALOG (COFFEE, DESSERTS & BEANS) ─────────────────────────────
 const CATALOG = [
@@ -146,6 +146,142 @@ function showToast(message, icon = '☕') {
   }, 2600);
 }
 
+// ─── 00 / SCROLL PROGRESS BAR & PARALLAX ────────────────────────────────────
+function setupScrollProgressAndParallax() {
+  const progressBar = document.getElementById('scroll-progress-bar');
+  const heroVisual = document.getElementById('hero-cup-wrap');
+  const scrollBtn = document.getElementById('scroll-to-top-btn');
+  const header = document.getElementById('site-header');
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  let ticking = false;
+
+  const updateOnScroll = () => {
+    const scrollY = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+
+    // 1. Progress Bar
+    if (progressBar && docHeight > 0) {
+      const progress = Math.min(100, Math.max(0, (scrollY / docHeight) * 100));
+      progressBar.style.width = `${progress}%`;
+    }
+
+    // 2. Header Scrolled state
+    if (header) {
+      if (scrollY > 24) {
+        header.classList.add('header--scrolled');
+      } else {
+        header.classList.remove('header--scrolled');
+      }
+    }
+
+    // 3. Scroll to top button
+    if (scrollBtn) {
+      if (scrollY > 380) {
+        scrollBtn.classList.add('is-visible');
+      } else {
+        scrollBtn.classList.remove('is-visible');
+      }
+    }
+
+    // 4. Subtle Parallax on Hero Cup (clean, non-blocking)
+    if (!prefersReducedMotion && heroVisual && scrollY < window.innerHeight * 1.2) {
+      const translateY = scrollY * 0.12;
+      const rotate = scrollY * 0.012;
+      heroVisual.style.transform = `translate3d(0, ${translateY}px, 0) rotate(${rotate}deg)`;
+    }
+
+    ticking = false;
+  };
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(updateOnScroll);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  // Initial call
+  updateOnScroll();
+
+  // Scroll to top click
+  if (scrollBtn) {
+    scrollBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  }
+}
+
+// ─── SMOOTH SCROLL REVEAL OBSERVER ──────────────────────────────────────────
+function setupScrollReveals() {
+  const revealElements = document.querySelectorAll('.scroll-reveal, .reveal-stagger');
+  if (revealElements.length === 0) return;
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-revealed');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, {
+    rootMargin: '0px 0px -40px 0px',
+    threshold: 0.12
+  });
+
+  revealElements.forEach((el) => observer.observe(el));
+}
+
+// ─── ANIMATED METRICS COUNTER ───────────────────────────────────────────────
+function setupAnimatedCounters() {
+  const metricItems = document.querySelectorAll('.metric-item');
+  if (metricItems.length === 0) return;
+
+  const animateNumber = (el) => {
+    const numEl = el.querySelector('.metric-num');
+    if (!numEl || numEl.dataset.counted === 'true') return;
+    numEl.dataset.counted = 'true';
+
+    const target = parseFloat(numEl.dataset.target || '0');
+    const decimals = parseInt(numEl.dataset.decimals || '0', 10);
+    const duration = 1600; // ms
+    const startTime = performance.now();
+
+    const step = (now) => {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      // Ease out cubic: 1 - pow(1 - progress, 3)
+      const easeOut = 1 - Math.pow(1 - progress, 3);
+      const current = target * easeOut;
+
+      numEl.textContent = decimals > 0 ? current.toFixed(decimals) : Math.floor(current).toString();
+
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      } else {
+        numEl.textContent = decimals > 0 ? target.toFixed(decimals) : target.toString();
+      }
+    };
+
+    requestAnimationFrame(step);
+  };
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        animateNumber(entry.target);
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  metricItems.forEach((item) => observer.observe(item));
+}
+
 // ─── CART / ORDER DRAWER STATE & ACTIONS ────────────────────────────────────
 const cart = {
   items: [],
@@ -189,7 +325,17 @@ const cart = {
 
     this.save();
     this.render();
+    this.bumpBadge();
     showToast(`Added ${product.name} to order!`, '✓');
+  },
+
+  bumpBadge() {
+    const badge = document.getElementById('cart-counter');
+    if (!badge) return;
+    badge.classList.remove('cart-badge--bump');
+    void badge.offsetWidth; // trigger reflow
+    badge.classList.add('cart-badge--bump');
+    setTimeout(() => badge.classList.remove('cart-badge--bump'), 320);
   },
 
   updateQty(productId, delta) {
@@ -309,7 +455,7 @@ const wishlist = {
   }
 };
 
-// ─── CAROUSEL SCROLL NAVIGATION ─────────────────────────────────────────────
+// ─── CAROUSEL SCROLL NAVIGATION WITH SMOOTH DRAG/TOUCH ──────────────────────
 function setupCarousels() {
   document.querySelectorAll('.carousel-arrow').forEach((arrow) => {
     arrow.addEventListener('click', () => {
@@ -326,6 +472,19 @@ function setupCarousels() {
         behavior: 'smooth'
       });
     });
+  });
+
+  // Enable subtle horizontal wheel scrolling on carousel tracks
+  document.querySelectorAll('.carousel-track').forEach((track) => {
+    track.addEventListener('wheel', (e) => {
+      if (Math.abs(e.deltaX) < Math.abs(e.deltaY) && Math.abs(e.deltaY) > 10) {
+        // Horizontal scroll via vertical wheel
+        track.scrollBy({
+          left: e.deltaY * 0.8,
+          behavior: 'auto'
+        });
+      }
+    }, { passive: true });
   });
 }
 
@@ -355,11 +514,13 @@ function setupCategories() {
           const items = track.querySelectorAll('.product-card');
           items.forEach((item) => {
             if (category === 'all' || item.dataset.category === category) {
+              item.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
               item.style.opacity = '1';
               item.style.transform = 'scale(1)';
             } else {
-              item.style.opacity = '0.45';
-              item.style.transform = 'scale(0.97)';
+              item.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
+              item.style.opacity = '0.38';
+              item.style.transform = 'scale(0.96)';
             }
           });
         }
@@ -581,19 +742,10 @@ function setupBeansBanner() {
   });
 }
 
-// ─── HEADER SCROLL SHADOW & MOBILE MENU ─────────────────────────────────────
-function setupHeader() {
-  const header = document.getElementById('site-header');
+// ─── HEADER MOBILE MENU TOGGLE ──────────────────────────────────────────────
+function setupMobileMenu() {
   const toggle = document.getElementById('mobile-menu-toggle');
   const nav = document.getElementById('main-nav');
-
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 20) {
-      header?.classList.add('header--scrolled');
-    } else {
-      header?.classList.remove('header--scrolled');
-    }
-  }, { passive: true });
 
   if (toggle && nav) {
     toggle.addEventListener('click', () => {
@@ -612,7 +764,7 @@ function setupHeader() {
   }
 }
 
-// ─── SECTION ACTIVE OBSERVER ────────────────────────────────────────────────
+// ─── SECTION ACTIVE OBSERVER (SCROLLSPY) ────────────────────────────────────
 function setupScrollSpy() {
   const sections = document.querySelectorAll('section[id]');
   const navItems = document.querySelectorAll('.nav-links .nav-item[href]');
@@ -630,7 +782,7 @@ function setupScrollSpy() {
         });
       }
     });
-  }, { rootMargin: '-20% 0px -70% 0px' });
+  }, { rootMargin: '-20% 0px -65% 0px' });
 
   sections.forEach((sec) => observer.observe(sec));
 }
@@ -639,6 +791,9 @@ function setupScrollSpy() {
 document.addEventListener('DOMContentLoaded', () => {
   cart.init();
   wishlist.init();
+  setupScrollProgressAndParallax();
+  setupScrollReveals();
+  setupAnimatedCounters();
   setupCarousels();
   setupCategories();
   setupSearchModal();
@@ -647,6 +802,6 @@ document.addEventListener('DOMContentLoaded', () => {
   setupCartDrawer();
   setupWishlistEvents();
   setupBeansBanner();
-  setupHeader();
+  setupMobileMenu();
   setupScrollSpy();
 });
